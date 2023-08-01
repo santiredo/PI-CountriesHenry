@@ -22,13 +22,14 @@ module.exports = (sequelize) => {
     },
     capital: {
       type: DataTypes.STRING,
-      unique: true
+      allowNull: true
     },
     subregion: {
       type: DataTypes.STRING,
+      allowNull: true
     },
     area: {
-      type: DataTypes.INTEGER
+      type: DataTypes.FLOAT
     },
     population: {
       type: DataTypes.INTEGER
