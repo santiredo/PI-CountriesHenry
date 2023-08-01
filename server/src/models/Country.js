@@ -8,7 +8,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(3),
       primaryKey: true,
       allowNull: false,
-      defaultValue: generateThreeLetterID
     },
     name: {
       type: DataTypes.STRING,
@@ -29,10 +28,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     area: {
-      type: DataTypes.NUMBER
+      type: DataTypes.INTEGER
     },
     population: {
-      type: DataTypes.NUMBER
+      type: DataTypes.INTEGER
     }
   });
 };
