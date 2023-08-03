@@ -18,15 +18,17 @@ const getCountries = async() => {
             country.subregion = '-'
         }
 
-        await Country.create({
-          id: country.cca3,
-          name: country.name.official,
-          image: country.flags.png,
-          continent: country.region,
-          capital: country.capital[0],
-          subregion: country.subregion,
-          area: country.area,
-          population: country.population,
+        await Country.findOrCreate({
+            where: {
+                id: country.cca3,
+                name: country.name.official,
+                image: country.flags.png,
+                continent: country.region,
+                capital: country.capital[0],
+                subregion: country.subregion,
+                area: country.area,
+                population: country.population
+            }
         });
     }
 
