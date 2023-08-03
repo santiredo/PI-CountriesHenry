@@ -11,15 +11,6 @@ const getCountries = async() => {
 
     for (const country of allCountries) {
 
-        console.log(country.cca3)
-        console.log(country.name.official)
-/*         console.log(country.flags.png)
-        console.log(country.region)
-        console.log(country.capital)
-        console.log(country.subregion)
-        console.log(country.area)
-        console.log(country.population) */
-
         if(!country.capital){
             country.capital = ['-']
         }
@@ -33,12 +24,11 @@ const getCountries = async() => {
           image: country.flags.png,
           continent: country.region,
           capital: country.capital[0],
-          subregion: country.subregion ? country.subregion : '-',
+          subregion: country.subregion,
           area: country.area,
           population: country.population,
         });
     }
-
 
     return allCountries
 }
