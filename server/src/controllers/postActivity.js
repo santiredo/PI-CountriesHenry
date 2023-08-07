@@ -20,8 +20,9 @@ const postActivity = async(name, difficulty, duration, season, countries) => {
             difficulty,
             duration,
             season,
-            countries: assignedCountries.map(country => country.name)
         })
+
+        await newActivity.addCountries(assignedCountries)
 
         return newActivity
         
