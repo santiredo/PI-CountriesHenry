@@ -1,0 +1,29 @@
+.landingPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.canvas{
+    width: auto;
+    height: 95vh;
+    z-index: 1000;
+}
+
+.canvasHover {
+    opacity: 60%;
+    width: auto;
+    height: 95vh;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.title{
+    color: #95efd7;
+    margin: 0;
+    font-size: 100px;
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 535px);
+    z-index: 1;
+}
