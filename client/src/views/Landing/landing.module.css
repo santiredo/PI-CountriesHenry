@@ -23,7 +23,7 @@
     margin: 0;
     font-size: 100px;
     position: absolute;
-    top: calc(50% - 100px);
-    left: calc(50% - 535px);
+    top: calc(50% - 120px);
+    left: calc(50% - 720px);
     z-index: 1;
 }
