@@ -1,0 +1,35 @@
+
+.searchBar{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+}
+
+.searchBar button{
+    border: none;
+    font-size: 20px;
+    padding: 2px 0;
+    margin: 0;
+    border-radius: 0;
+    background-color: #61AF9A;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.searchBar button:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px #0B0332;
+}
+
+.searchBar input{
+    font-family: 'Courier New';
+    border: none;
+    border-radius: 0;
+    font-size: 20px;
+    background-color: #61AF9A;
+}
+
+.searchBar input:focus{
+    outline: none;
+    box-shadow: 0 0 10px #0B0332;
+}
