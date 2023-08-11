@@ -1,9 +1,9 @@
 
-
-
+import { useLocation, Route, Routes } from 'react-router-dom'
+import Home from './views/Home/Home'
 import Landing from './views/Landing/Landing'
 import './App.css'
-import { useLocation, Route, Routes } from 'react-router-dom'
+
 
 export default function App() {
 
@@ -15,6 +15,14 @@ export default function App() {
       <>
         <Routes>
           <Route path='/' element={<Landing/>}/>
+        </Routes>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <Routes>
+          <Route path='/home' element={<Home/>}/>
         </Routes>
       </>
     )
