@@ -1,0 +1,17 @@
+.countriesSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.countriesSection h1{
+    position: absolute;
+    top: 0;
+    color: #ffee00eb;
+}
+
+.loadingGif{
+    width: 200px;
+    height: 200px;
+}

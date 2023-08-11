@@ -1,5 +1,5 @@
 
-import Countries from '../../components/CountriesViews/Countries'
+import Countries from '../../components/Countries/Countries'
 import Filters from '../../components/Filters/Filters'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import style from './home.module.css'
