@@ -1,0 +1,52 @@
+.allFilters {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    gap: 10px;
+}
+
+.allFilters h3{
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.divOverflow{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #61AF9A;
+    width: 100%;
+    max-height: 102px;
+    overflow: auto;
+}
+
+.options{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #61AF9A;
+    width: 98%;
+    padding-right: 2%;
+    max-height: 102px;
+    overflow: auto;
+}
+
+.divOverflow::-webkit-scrollbar{
+    width: 2px;
+}
+
+.divOverflow::-webkit-scrollbar-thumb {
+    background-color: #95efd7;
+    padding: 2px;
+}
+
+.options p{
+    margin: 5px 0;
+    width: 95%;
+}
+
+.options p:hover{
+    cursor: pointer;
+    background-color: #cdcdcd;
+}
