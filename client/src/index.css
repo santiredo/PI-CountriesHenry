@@ -20,6 +20,15 @@ body {
   font-family:'Courier New';
 }
 
+body::-webkit-scrollbar{
+  width: 2px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #ffee0069;
+  padding: 2px;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

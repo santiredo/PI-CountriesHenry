@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCountries } from "../../redux/action";
+import { getAllCountries, setPage } from "../../redux/action";
 
 import loadingGif from '../../assets/loadingGif.gif'
 import style from './countries.module.css'
@@ -18,11 +18,16 @@ export default function Countries() {
     const currentPage = useSelector(state => state.currentPage);
     const firstIndexCountry = (currentPage - 1) * countriesPerPage;
     const lastIndexCountry = firstIndexCountry + countriesPerPage;
-    const renderedCountries = countries.slice(firstIndexCountry, lastIndexCountry)
+    const renderedCountries = countries.slice(firstIndexCountry, lastIndexCountry);
+    const lastPage = countries.length / 10
+
+    const handlerPagination = (direction) => {
+        dispatch(setPage(direction, currentPage, countriesPerPage, countries))
+    }
 
     useEffect(() => {
-        dispatch(getAllCountries())
-    }, [dispatch])
+            dispatch(getAllCountries())
+    }, [])
 
 
     return (
@@ -34,7 +39,19 @@ export default function Countries() {
                     <img className={style.loadingGif} src={loadingGif} alt="" />
                 )
                 : (
+                    <>
+                    
                     <div className={style.pagination}>
+                        <button onClick={() => handlerPagination(-1)} className={style.paginationButton}>Prev</button>
+                        <div>
+                            <p>{ currentPage - 1 > 0 && `${currentPage - 1}`}</p>
+                            <p className={style.currentPage}>{currentPage}</p>
+                            <p>{ currentPage + 1 <= lastPage && `${currentPage + 1}`}</p>                    
+                        </div>
+
+                        <button onClick={() => handlerPagination(1)} className={style.paginationButton}>Next</button>
+                    </div>
+                    <div className={style.divCountries}>
                         {
                             renderedCountries.map(country => (
                                 <Country
@@ -47,8 +64,11 @@ export default function Countries() {
                             ))
                         }
                     </div>
+                    </>
+                    
                 )
             }
+            
         </div>
     )
 }
