@@ -1,0 +1,63 @@
+.detailPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    color: #18252f;
+}
+
+.backgroundImage{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.5;
+}
+
+.detailsDiv{
+    overflow: auto;
+    position: absolute;
+    top: 12.5%;
+    left: 12.5%;
+    width: 75%;
+    height: 75vh;
+}
+
+.detailsDiv::-webkit-scrollbar{
+    width: 5px;
+}
+
+.detailsDiv::-webkit-scrollbar-thumb {
+    background-color: #18252f;
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.infoContainer{
+    margin-top: 10px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    opacity: 1;
+    z-index: 1000;
+}
+
+.infoContainer div{
+    text-align: center;
+}
+
+.detailsBackground{
+    position: fixed;
+    top: 12.5%;
+    left: 12.5%;
+    width: 75%;
+    height: 75vh;
+    background-color: #61AF9A;
+    opacity: 0.8;
+    z-index: -1;
+}
