@@ -14,6 +14,12 @@ export default function rootReducer(state = initialState, {type, payload}) {
                 ...state,
                 allCountries: payload,
                 renderedCountries: payload,
+                loading: false
+            }
+        case 'SET_PAGE':
+            return {
+                ...state,
+                currentPage: payload
             }
         
         default:
