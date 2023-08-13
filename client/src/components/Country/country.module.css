@@ -27,6 +27,7 @@
 }
 
 .imageDiv{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,27 +37,57 @@
 .imageDiv div{
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 140px;
     height: 140px;
     border-radius: 100px;
     overflow: hidden;
 }
 
-.imageDiv div:hover{
-    cursor: pointer;
-    animation: countryDetails .5s forwards;
+.imageDiv img{
+    height: 140px;
 }
 
-@keyframes countryDetails {
+.imageDiv div:hover img{
+    opacity: .5;
+    transition: .5s;
+}
+
+.imageDiv a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 140px;
+    width: 140px;
+    border-radius: 100px;
+    background-color: #213547de;
+    color: #ffee00b6;
+    text-decoration: none;
+    opacity: 0;
+}
+
+.imageDiv div:hover a{
+    opacity: 1;
+    transition: .5s;
+}
+
+.imageDiv div:hover{
+    cursor: pointer;
+    animation: showDetails .5s forwards;
+}
+
+@keyframes showDetails {
     0%{
         transform: scale(1);
     }
     100%{
         transform: scale(1.05);
         box-shadow: 0 0 10px #ffee00;
-        background-color: #ffee00bc;
     }
 }
+
+
 
 .countryDetails{
     display: flex;

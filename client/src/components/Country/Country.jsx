@@ -1,8 +1,8 @@
 
-
+import {NavLink} from 'react-router-dom';
 import style from './country.module.css'
 
-export default function Country({name, image, continent}) {
+export default function Country({id, name, image, continent}) {
     return (
         <div className={style.countryCard}>
             <img className={style.background} src={image} alt="" />
@@ -10,6 +10,7 @@ export default function Country({name, image, continent}) {
                 <div className={style.imageDiv}>
                     <div>
                         <img src={image} alt="" />
+                        <NavLink to={`/detail/${id}`}>+ INFO</NavLink>
                     </div>
                 </div>
                 <div className={style.countryDetails}>

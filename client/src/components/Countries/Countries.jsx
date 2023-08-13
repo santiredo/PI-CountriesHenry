@@ -12,7 +12,7 @@ export default function Countries() {
 
     const dispatch = useDispatch()
     const countries = useSelector(state => state.renderedCountries)
-    const loading = useSelector(state => state.loading)
+    const loading = useSelector(state => state.loadingHome)
 
     const countriesPerPage = 10;
     const currentPage = useSelector(state => state.currentPage);
