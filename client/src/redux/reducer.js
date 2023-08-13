@@ -2,8 +2,10 @@
 const initialState = {
     allCountries: [],
     renderedCountries: [],
-    loading: true,
-    currentPage: 1
+    loadingHome: true,
+    currentPage: 1,
+    countryDetails: [],
+    loadingDetails: true
 }
 
 export default function rootReducer(state = initialState, {type, payload}) {
@@ -14,12 +16,20 @@ export default function rootReducer(state = initialState, {type, payload}) {
                 ...state,
                 allCountries: payload,
                 renderedCountries: payload,
-                loading: false
+                loadingHome: false,
+                loadingDetails: true
             }
         case 'SET_PAGE':
             return {
                 ...state,
                 currentPage: payload
+            }
+        case 'SHOW_DETAILS':
+            return {
+                ...state,
+                countryDetails: payload,
+                loadingDetails: false,
+                loadingHome: true
             }
         
         default:

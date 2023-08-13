@@ -1,12 +1,11 @@
 import axios from 'axios'
 
 export const getAllCountries = () => {
-    return async (dispach) => {
+    return async (dispatch) => {
         try {
             const response = await axios('http://localhost:3001/countries')
             const data = response.data
-            console.log(data[0])
-            return dispach({
+            return dispatch({
                 type: 'GET_ALL_COUNTRIES',
                 payload: data
             })
@@ -32,6 +31,24 @@ export const setPage = (direction, currentPage, countriesPerPage, countries) => 
                 }
             }
             throw new Error(`Page N°${currentPage + direction} is empty`)
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+}
+
+export const showDetails = (id) => {
+    return async(dispatch) => {
+        try {
+
+            const response = await axios(`http://localhost:3001/countries/${id}`)
+            const data = response.data
+            return dispatch({
+                type: 'SHOW_DETAILS',
+                payload: data
+            })
+
+            
         } catch (error) {
             alert(error.message)
         }
