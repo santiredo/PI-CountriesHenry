@@ -61,8 +61,8 @@
     height: 140px;
     width: 140px;
     border-radius: 100px;
-    background-color: #213547de;
-    color: #ffee00b6;
+    background-color: #000000;
+    color: #ffffff;
     text-decoration: none;
     opacity: 0;
 }
@@ -83,7 +83,7 @@
     }
     100%{
         transform: scale(1.05);
-        box-shadow: 0 0 10px #ffee00;
+        box-shadow: 0 0 10px #ffffff;
     }
 }
 
@@ -97,8 +97,8 @@
     height: 70%;
     width: 50%;
     padding: 0 10px;
-    background-color: #213547de;
-    color: #ffee00b6;
+    background-color: #000000de;
+    color: #ffffffcc;
     position: relative;
 }
 

@@ -13,8 +13,8 @@ export default function Filters() {
                 <p>Z - A</p>
             </div>
             <div className={style.options}>
-                <p>Population ⇑</p>
-                <p>Population ⇓</p>
+                <p>+ 🕴🏿 +{/* ⇑ */}</p>
+                <p>- 🕴🏿 -{/* ⇓ */}</p>
             </div>
             <div className={style.options}>
                 <div className={style.divOverflow}>

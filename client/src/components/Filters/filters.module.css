@@ -11,11 +11,17 @@
     margin-bottom: 0;
 }
 
+.allFilters p{
+    color: #cdcdcd;
+    margin: 5px 0;
+    width: 95%;
+}
+
 .divOverflow{
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: #61AF9A;
+    background-color: #000000;
     width: 100%;
     max-height: 102px;
     overflow: auto;
@@ -25,7 +31,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: #61AF9A;
+    background-color: #000000;
     width: 98%;
     padding-right: 2%;
     max-height: 102px;
@@ -33,20 +39,19 @@
 }
 
 .divOverflow::-webkit-scrollbar{
-    width: 2px;
+    width: 3px;
+    height: 2px;
 }
 
 .divOverflow::-webkit-scrollbar-thumb {
-    background-color: #95efd7;
+    background-color: #838588;
     padding: 2px;
+    border-radius: 50%;
+
 }
 
-.options p{
-    margin: 5px 0;
-    width: 95%;
-}
-
-.options p:hover{
+.allFilters p:hover{
     cursor: pointer;
-    background-color: #cdcdcd;
+    background-color: #838588;
+    color: #000000;
 }

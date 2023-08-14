@@ -7,7 +7,7 @@
 .canvas{
     width: auto;
     height: 95vh;
-    z-index: 1000;
+    z-index: 999;
 }
 
 .canvasHover {
@@ -19,11 +19,12 @@
 }
 
 .title{
-    color: #95efd7;
+    color: #ffffff;
     margin: 0;
     font-size: 100px;
     position: absolute;
     top: calc(50% - 120px);
     left: calc(50% - 720px);
     z-index: 1;
+    opacity: 0.8;
 }

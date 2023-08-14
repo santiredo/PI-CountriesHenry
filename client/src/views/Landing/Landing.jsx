@@ -7,7 +7,7 @@ export default function Landing () {
     const canvasRef = useRef(null);
     const [isHovering, setIsHovering] = useState(false);
   
-    const backgroundColor = [97, 175, 154]; // Valor RGB del color de fondo
+    const backgroundColor = [0, 0, 0]; // Valor RGB del color de fondo
   
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -46,9 +46,9 @@ export default function Landing () {
 
         // Compara los valores RGB del píxel con el color de fondo
         const isPixelBackground = (
-        pixel[0] === backgroundColor[0] &&
-        pixel[1] === backgroundColor[1] &&
-        pixel[2] === backgroundColor[2]
+        pixel[0] !== backgroundColor[0] &&
+        pixel[1] !== backgroundColor[1] &&
+        pixel[2] !== backgroundColor[2]
         );
 
         setIsHovering(isPixelBackground);

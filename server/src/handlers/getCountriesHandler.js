@@ -5,8 +5,6 @@ const getCountriesHandler = async(req, res) => {
     try {
         const allCountries = await getCountries()
 
-        console.log(allCountries)
-
         return res.status(200).json(allCountries)
         
     } catch (error) {

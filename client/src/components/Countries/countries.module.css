@@ -10,12 +10,12 @@
 .countriesSection h1{
     position: absolute;
     top: 5px;
-    color: #ffee00eb;
+    color: #ffffffcc;
 }
 
 .loadingGif{
     width: 200px;
-    height: 200px;
+    height: 150px;
 }
 
 .pagination{
@@ -37,7 +37,7 @@
 
 .pagination p{
     width: 40px;
-    color: #ffee00b3;
+    color: #ffffffcc;
     text-align: center;
     margin: 0;
 }
@@ -47,17 +47,15 @@
     font-size: medium;
     padding: 1px 15px 0 17px;
     letter-spacing: 2px;
-    font-weight: 600;
-    background-color: transparent;
-    color: #ffee00b3;
+    background-color: #1b1c1e;
+    color: #ffffffcc;
     border: none;
-    border-radius: 2px;
-    box-shadow: 0 0 5px #ffee00b3;
+    box-shadow: 0 0 5px #ffffffcc;
 }
 
 .paginationButton:hover{
     cursor: pointer;
-    box-shadow: 0 0 3px #ffee00b3;
+    box-shadow: 0 0 3px #ffffffcc;
     transform: scale(0.99);
 }
 
