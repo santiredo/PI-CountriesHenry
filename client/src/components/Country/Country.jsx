@@ -10,7 +10,7 @@ export default function Country({id, name, image, continent}) {
                 <div className={style.imageDiv}>
                     <div>
                         <img src={image} alt="" />
-                        <NavLink to={`/detail/${id}`}>+ INFO</NavLink>
+                        <NavLink to={`/detail/${id}`}>+INFO</NavLink>
                     </div>
                 </div>
                 <div className={style.countryDetails}>
