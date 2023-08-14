@@ -1,0 +1,28 @@
+.nav{
+    display: flex;
+    gap: 30px;
+}
+
+.nav a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color: #ffffff9d;
+    padding: 0;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 5px #000000;
+
+}
+
+.nav a:hover{
+    box-shadow: 0 0 3px #000000;
+    transform: scale(.95);
+}
+
+.nav img{
+    width: 20px;
+    height: 20px;
+}

@@ -8,6 +8,12 @@
     color: #838588;
 }
 
+.nav{
+    position: absolute;
+    left: 47px;
+    top: 20px;
+}
+
 .backgroundImage{
     position: fixed;
     width: 100%;

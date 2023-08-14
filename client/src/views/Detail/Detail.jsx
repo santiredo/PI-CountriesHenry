@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import { showDetails } from "../../redux/action"
 import loadingGif from '../../assets/loadingGif.gif'
 import style from './detail.module.css'
+import Nav from "../../components/Nav/Nav"
 
 
 
@@ -22,6 +23,9 @@ export default function Detail() {
     return (
         <div className={style.detailPage}>
             <img className={style.backgroundImage} src={details.image} alt="" />
+            <div className={style.nav}>
+                <Nav/> 
+            </div>
             {
                 loading
                 ?   <img src={loadingGif} alt="" />
@@ -31,10 +35,10 @@ export default function Detail() {
                         <div className={style.infoContainer}>
                             <div>
                                 <h2>Id: {details.id}</h2>
-                                <h2>Region: {details.continent}</h2>
-                                <h2>Population: {details.population}🚶🏾‍♂️</h2>
                                 <h2>Capital: {details.capital}</h2>
+                                <h2>Region: {details.continent}</h2>
                                 <h2>Subregion: {details.subregion}</h2>
+                                <h2>Population: {details.population}🕴🏿</h2>
                                 <h2>Area: {details.area}km²</h2>                                    
                             </div>
                         </div>
