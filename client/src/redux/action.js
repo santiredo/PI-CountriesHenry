@@ -54,3 +54,24 @@ export const showDetails = (id) => {
         }
     }
 }
+
+export const orderCountries = (order) => {
+    return {
+        type: 'ORDER',
+        payload: order
+    }
+}
+
+export const orderByRegion = (region) => {
+    return {
+        type: 'REGION',
+        payload: region
+    }
+}
+
+export const orderByActivity = (activity) => {
+    return {
+        type: 'ACTIVITY',
+        payload: activity
+    }
+}
