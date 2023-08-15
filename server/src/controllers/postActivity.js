@@ -1,17 +1,17 @@
 const { Activity, Country } = require("../db")
 
 
-const postActivity = async(name, difficulty, duration, season, countries) => {
+const postActivity = async(name, difficulty, duration, season, Countries) => {
 
     try {
 
-        if(!name || !difficulty || !duration || !season || !countries){
+        if(!name || !difficulty || !duration || !season || !Countries){
             throw new Error('Some data is missing')
         }
 
         const assignedCountries = await Country.findAll({
             where: {
-                name: countries
+                name: Countries
             }
         })
 
