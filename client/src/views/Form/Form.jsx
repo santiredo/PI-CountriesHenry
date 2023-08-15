@@ -12,13 +12,12 @@ import { getAllCountries } from '../../redux/action';
 
 export default function Form() {
 
-
-    const countries = useSelector(state => state.allCountries)
+    
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getAllCountries())
-    })
+    },[])
 
     const [form, setForm] = useState({
         name:'',
@@ -27,10 +26,14 @@ export default function Form() {
         season:[],
         Countries:[]
     })
+    
+
+    // LLAMADO PARA RENDERIZAR LOS PAISES
+    const countries = useSelector(state => state.allCountries)
+
+    //////// MANEJADORES PARA EL CHANGE DE LOS INPUTS
 
     const handleChange = (event) => {
-
-        console.log(countries)
 
         setForm({
             ...form,
@@ -86,7 +89,7 @@ export default function Form() {
     }
 
 
-    // FUNCIONES PARA LOS SELECTS
+    //////// FUNCIONES PARA LOS SELECTS (CSS)
 
     const [difficulty, setDifficulty] = useState(false)
     const [season, setSeason] = useState(false)
@@ -98,7 +101,7 @@ export default function Form() {
         if(!difficulty) {
             setDifficulty(true)
             difficultyOptions.classList.remove('hiddenOptions');            
-            difficultyOptions.classList.add('showDifficulty');            
+            difficultyOptions.classList.add('showDifficulty');           
 
         } else{
             setDifficulty(false)
@@ -113,6 +116,7 @@ export default function Form() {
             difficultyOptions.classList.add('hideDifficulty')
         }
         event.currentTarget.classList.toggle('difficultyActive')
+        
     }
 
     const handleSelectSeason = (event) => {
@@ -161,8 +165,66 @@ export default function Form() {
         event.currentTarget.classList.toggle('countryActive')
     }
 
+    const handleClickOutside = (event) => {
+
+        const selectDifficulty = event.target.closest('difficulty')
+        const difficultyActive = document.querySelector('.difficultyActive')
+
+        if(!selectDifficulty && difficulty === true){
+            setDifficulty(false)
+
+            setTimeout(() => {
+                difficultyOptions.classList.remove('hideDifficulty');
+                difficultyOptions.classList.add('hiddenOptions')
+                
+            }, 500);
+            
+            difficultyOptions.classList.remove('showDifficulty')
+            difficultyOptions.classList.add('hideDifficulty')
+            difficultyActive.classList.remove('difficultyActive')
+            difficultyActive.classList.add('.difficulty')
+        }
+
+        const selectSeason = event.target.closest('season')
+        const seasonActive = document.querySelector('.seasonActive')
+
+        if(!selectSeason && season === true){
+            setSeason(false)
+
+            setTimeout(() => {
+                seasonOptions.classList.remove('hideSeason');
+                seasonOptions.classList.add('hiddenOptions')
+                
+            }, 500);
+
+            seasonOptions.classList.remove('showSeason')
+            seasonOptions.classList.add('hideSeason')
+            seasonActive.classList.remove('seasonActive')
+            seasonActive.classList.add('season')
+        }
+
+        const selectCountry = event.target.closest('country')
+        const countryActive = document.querySelector('.countryActive')
+
+        if(!selectCountry && country === true){
+            setCountry(false)
+
+            setTimeout(() => {
+                countryOptions.classList.remove('hideCountry');
+                countryOptions.classList.add('hiddenOptions')
+                
+            }, 500);
+
+            countryOptions.classList.remove('showCountry')
+            countryOptions.classList.add('hideCountry')
+            countryActive.classList.remove('countryActive')
+            countryActive.classList.add('country')
+        }
+
+    }
+
     return (
-        <div className={style.formPage}>
+        <div className={style.formPage} onClick={handleClickOutside}>
             <div className={style.nav}>
                 <Nav/> 
             </div>
@@ -178,7 +240,7 @@ export default function Form() {
                             <p className='title'>Difficulty</p>
                         </div>
                     </div>
-                    <div id='difficulty' name='difficuulty' value={form.difficulty} onChange={handleChange} className={style.options}>{form.difficulty}</div>
+                    <div id='difficulty' name='difficulty' value={form.difficulty} onChange={handleChange} className={style.options}>{form.difficulty}</div>
                     <div className='hiddenOptions' id="difficultyOptions">
                         <div className="option">
                             <p onClick={handleDifficulty}>1</p>
@@ -243,26 +305,23 @@ export default function Form() {
                             })
                         }
                     </div>
-                </div>
-                <div id='Countries' name='Countries' value={form.Countries} onChange={handleChange} className={style.countries}>
-                    {
-                        form.Countries.map(country => {
-                            return (
-                                <React.Fragment key={country}>
-                                    {form.Countries[4] !== country ? <>{country},<br/></> : `${country}`}
-                                </React.Fragment>
-                            )
-                        })
-                    }
+                    <div id='Countries' name='Countries' value={form.Countries} onChange={handleChange} className={style.countries}>
+                        {
+                            form.Countries.map(country => {
+                                return (
+                                    <React.Fragment key={country}>
+                                        {form.Countries[4] !== country ? <>{country},<br/></> : `${country}`}
+                                    </React.Fragment>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
                 <div className='selectBox'>
                     <label>Duration (hs)</label>
                     <input  type="text" name="duration" id="duration" value={form.duration} onChange={handleChange}/>                    
                 </div>
-                <div>
-                    <button type='submit' className={style.button}>CREATE</button>
-                </div>
-
+                <button type='submit' className={style.button}>CREATE</button>
             </form>
         </div>
     )
