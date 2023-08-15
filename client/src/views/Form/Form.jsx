@@ -4,10 +4,11 @@ import React from 'react';
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Nav from '../../components/Nav/Nav';
-import { getAllCountries } from '../../redux/action';
+import { createActivity, getAllCountries } from '../../redux/action';
 
 import './form.css'
 import style from './form.module.css'
+import { validateForm, validateSubmit } from './Validation/validations';
 
 
 export default function Form() {
@@ -15,17 +16,50 @@ export default function Form() {
     
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getAllCountries())
-    },[])
-
     const [form, setForm] = useState({
         name:'',
         difficulty:'',
         duration:'',
-        season:[],
+        season:'',
         Countries:[]
     })
+
+    const [errors, setErrors] = useState({})
+
+    useEffect(() => {
+        dispatch(getAllCountries())
+
+        setErrors(validateForm(form))
+
+        console.log(errors)
+        console.log(form)
+    },[form])
+
+
+    const submitHandler = (event) => {
+        event.preventDefault()
+
+        if(!validateSubmit(form)){
+            setForm({
+                ...form,
+                difficulty: Number(form.difficulty),
+                duration: Number(form.duration)
+            })
+            dispatch(createActivity(form))
+            alert('Congratulations, your activity is created')
+
+            setForm({
+                name:'',
+                difficulty:'',
+                duration:'',
+                season:'',
+                Countries:[]
+            })
+        }else{
+            alert('You must complete the form correctly')
+        }
+
+    }
     
 
     // LLAMADO PARA RENDERIZAR LOS PAISES
@@ -51,20 +85,10 @@ export default function Form() {
     }
 
     const handleSeason = (event) => {
-        console.log(form.season)
-        if(form.season.length > 1){
-            setForm({
-                ...form,
-                season: [event.target.innerText]
-            })
-            alert('Only 2 seasons are available at the same time')
-        } else{
-            setForm({
-                ...form,
-                season: [...form.season, event.target.innerText]
-            })
-        }
-
+        setForm({
+            ...form,
+            season: event.target.innerText
+        })
     }
 
     const handleCountry = (event) => {
@@ -227,11 +251,14 @@ export default function Form() {
             <h1>Time to create an Activity</h1>
             <form onSubmit={submitHandler}>
                 <div className='selectBox'>
-                    <label>Name</label>
+                    <div className={style.label}>
+                        <label>Name:</label>
+                        {errors?.name && <p className={style.error}>{errors.name}</p>}
+                    </div>
                     <input type="text" name="name" id="name" value={form.name} onChange={handleChange}/>
-                    {errors?.name && <span>{errors.name}</span>}
                 </div>
                 <div className='selectBox'>
+                    {errors?.difficulty && <span>{errors.difficulty}</span>}
                     <div onClick={handleSelectDifficulty} className='difficulty'>
                         <div>
                             <p className='title'>Difficulty</p>
@@ -257,34 +284,30 @@ export default function Form() {
                     </div>
                 </div>
                 <div className='selectBox'>
+                    {errors?.season && <span>{errors.season}</span>}
                     <div onClick={handleSelectSeason} className='season'>
                         <div>
                             <p className='title'>Season</p>
                         </div>
                     </div>
-                    <div id='season' name='season' value={form.season} onChange={handleChange} className={style.options}>
-                        {
-                            form.season.map(season => {
-                                return form.season[0] === season ? `${season}, ` : `${season}`
-                            })
-                        }
-                    </div>
+                    <div id='season' name='season' value={form.season} onChange={handleChange} className={style.options}>{form.season}</div>
                     <div className='hiddenOptions' id="seasonOptions">
                         <div className="option">
-                            <p onClick={handleSeason} >Summer</p>
+                            <p onClick={handleSeason}>Summer</p>
                         </div>
                         <div className="option">
-                            <p onClick={handleSeason} >Autumn</p>
+                            <p onClick={handleSeason}>Autumn</p>
                         </div>
                         <div className="option">
-                            <p onClick={handleSeason} >Winter</p>
+                            <p onClick={handleSeason}>Winter</p>
                         </div>
                         <div className="option">
-                            <p onClick={handleSeason} >Springs</p>
+                            <p onClick={handleSeason}>Springs</p>
                         </div>
                     </div>
                 </div>
                 <div className='selectBox'>
+                {errors?.Countries && <span>{errors.Countries}</span>}
                     <div onClick={handleSelectCountry} className='country'>
                         <div>
                             <p className='title'>Countries</p>
@@ -315,7 +338,10 @@ export default function Form() {
                     </div>
                 </div>
                 <div className='selectBox'>
-                    <label>Duration (hs)</label>
+                    <div className={style.label}>
+                        <label>Duration(hs):</label>
+                        {errors?.duration && <p className={style.error}>{errors.duration}</p>}
+                    </div>
                     <input  type="text" name="duration" id="duration" value={form.duration} onChange={handleChange}/>                    
                 </div>
                 <button type='submit' className={style.button}>CREATE</button>
