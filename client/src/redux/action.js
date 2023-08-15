@@ -75,3 +75,24 @@ export const orderByActivity = (activity) => {
         payload: activity
     }
 }
+
+export const createActivity = (activity) => {
+    return async(dispatch) => {
+
+        try {
+
+            const {name, difficulty, season, Countries, duration} = activity
+
+            const response = await axios.post('http://localhost:3001/activities', {name, difficulty, season, Countries, duration})
+            const dbActivity = response.data
+
+            return dispatch({
+                type: 'CREATE_ACTIVITY',
+                payload: dbActivity
+            })
+            
+        } catch (error) {
+            alert('Some data is missing')
+        }
+    }
+}

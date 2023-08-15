@@ -5,7 +5,8 @@ const initialState = {
     loadingHome: true,
     currentPage: 1,
     countryDetails: [],
-    loadingDetails: true
+    loadingDetails: true,
+    activities: []
 }
 
 export default function rootReducer(state = initialState, {type, payload}) {
@@ -45,6 +46,14 @@ export default function rootReducer(state = initialState, {type, payload}) {
             return {
                 ...state,
                 renderedCountries: state.renderedCountries.filter(country => country.continent === payload)
+            }
+
+        
+
+        case 'CREATE_ACTIVITY':
+            return {
+                ...state,
+                activities: [payload, ...state.activities]
             }
         
 
