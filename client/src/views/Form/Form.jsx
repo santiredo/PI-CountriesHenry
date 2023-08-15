@@ -3,11 +3,11 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import Nav from '../../components/Nav/Nav'
+import Nav from '../../components/Nav/Nav';
+import { getAllCountries } from '../../redux/action';
 
 import './form.css'
 import style from './form.module.css'
-import { getAllCountries } from '../../redux/action';
 
 
 export default function Form() {
@@ -165,12 +165,11 @@ export default function Form() {
         event.currentTarget.classList.toggle('countryActive')
     }
 
-    const handleClickOutside = (event) => {
+    const handleClickOutside = () => {
 
-        const selectDifficulty = event.target.closest('difficulty')
-        const difficultyActive = document.querySelector('.difficultyActive')
+        const difficultyActive = document.querySelector('.difficulty')
 
-        if(!selectDifficulty && difficulty === true){
+        if(difficulty){
             setDifficulty(false)
 
             setTimeout(() => {
@@ -181,14 +180,13 @@ export default function Form() {
             
             difficultyOptions.classList.remove('showDifficulty')
             difficultyOptions.classList.add('hideDifficulty')
-            difficultyActive.classList.remove('difficultyActive')
-            difficultyActive.classList.add('.difficulty')
+            difficultyActive.classList.value.includes('difficultyActive') && difficultyActive.classList.toggle('difficultyActive')
+            
         }
 
-        const selectSeason = event.target.closest('season')
-        const seasonActive = document.querySelector('.seasonActive')
+        const seasonActive = document.querySelector('.season')
 
-        if(!selectSeason && season === true){
+        if(season === true){
             setSeason(false)
 
             setTimeout(() => {
@@ -199,14 +197,13 @@ export default function Form() {
 
             seasonOptions.classList.remove('showSeason')
             seasonOptions.classList.add('hideSeason')
-            seasonActive.classList.remove('seasonActive')
-            seasonActive.classList.add('season')
+            seasonActive.classList.value.includes('seasonActive') && seasonActive.classList.toggle('seasonActive')
+
         }
 
-        const selectCountry = event.target.closest('country')
-        const countryActive = document.querySelector('.countryActive')
+        const countryActive = document.querySelector('.country')
 
-        if(!selectCountry && country === true){
+        if(country === true){
             setCountry(false)
 
             setTimeout(() => {
@@ -217,8 +214,7 @@ export default function Form() {
 
             countryOptions.classList.remove('showCountry')
             countryOptions.classList.add('hideCountry')
-            countryActive.classList.remove('countryActive')
-            countryActive.classList.add('country')
+            countryActive.classList.value.includes('countryActive') && countryActive.classList.toggle('countryActive')
         }
 
     }
@@ -229,10 +225,11 @@ export default function Form() {
                 <Nav/> 
             </div>
             <h1>Time to create an Activity</h1>
-            <form action="">
+            <form onSubmit={submitHandler}>
                 <div className='selectBox'>
                     <label>Name</label>
-                    <input type="text" name="name" id="name" value={form.name} onChange={handleChange}/>                    
+                    <input type="text" name="name" id="name" value={form.name} onChange={handleChange}/>
+                    {errors?.name && <span>{errors.name}</span>}
                 </div>
                 <div className='selectBox'>
                     <div onClick={handleSelectDifficulty} className='difficulty'>
