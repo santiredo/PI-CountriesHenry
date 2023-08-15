@@ -114,3 +114,20 @@ export const getActivities = () => {
         }
     }
 }
+
+export const searchByName = (name) => {
+    return async(dispatch) => {
+        try {
+
+            const response = await axios(`http://localhost:3001/country?name=${name}`)
+            const countries = response.data
+            return dispatch({
+                type: 'SEARCH_BY_NAME',
+                payload: countries
+            })
+            
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+}

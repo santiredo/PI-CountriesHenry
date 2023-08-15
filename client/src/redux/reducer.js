@@ -65,7 +65,11 @@ export default function rootReducer(state = initialState, {type, payload}) {
                 ...state,
                 activities: payload
             }
-        
+        case 'SEARCH_BY_NAME':
+            return {
+                ...state,
+                renderedCountries: payload
+            }
 
         default:
             return state;
