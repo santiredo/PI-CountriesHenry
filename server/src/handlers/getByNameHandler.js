@@ -11,8 +11,6 @@ const getByNameHandler = async(req, res) => {
 
         const countries = await getCountriesByName(name)
 
-        console.log(countries)
-
         res.status(200).json(countries)
         
     } catch (error) {
