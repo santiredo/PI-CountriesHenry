@@ -47,13 +47,23 @@ export default function rootReducer(state = initialState, {type, payload}) {
                 ...state,
                 renderedCountries: state.renderedCountries.filter(country => country.continent === payload)
             }
+        case 'ACTIVITY' :
+            let activity = state.activities.find(activity => activity.name === payload)
 
-        
+            return {
+                ...state,
+                renderedCountries: state.renderedCountries.filter(country => activity.Countries.includes(country.name))
+            }       
 
         case 'CREATE_ACTIVITY':
             return {
                 ...state,
                 activities: [payload, ...state.activities]
+            }
+        case 'GET_ACTIVITIES':
+            return {
+                ...state,
+                activities: payload
             }
         
 

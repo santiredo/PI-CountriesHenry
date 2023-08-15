@@ -96,3 +96,21 @@ export const createActivity = (activity) => {
         }
     }
 }
+
+export const getActivities = () => {
+    return async(dispatch) => {
+
+        try {
+            const response = await axios('http://localhost:3001/activities')
+            const activities = response.data
+
+            return dispatch({
+                type: 'GET_ACTIVITIES',
+                payload: activities
+            })
+            
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+}
