@@ -68,10 +68,14 @@ export default function rootReducer(state = initialState, {type, payload}) {
                 activities: payload
             }
         case 'SEARCH_BY_NAME':
-            return {
-                ...state,
-                renderedCountries: payload,
-                currentPage: 1
+            if(payload.length === 0) {
+                return {...state, currentPage: 1}
+            } else{
+                return {
+                    ...state,
+                    renderedCountries: payload,
+                    currentPage: 1
+                }
             }
 
         default:

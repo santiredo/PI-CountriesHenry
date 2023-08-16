@@ -122,6 +122,7 @@ export const searchByName = (name) => {
 
             const response = await axios(`http://localhost:3001/country?name=${name}`)
             const countries = response.data
+            countries.length === 0 && alert('That search doesent match any country')
             return dispatch({
                 type: 'SEARCH_BY_NAME',
                 payload: countries
