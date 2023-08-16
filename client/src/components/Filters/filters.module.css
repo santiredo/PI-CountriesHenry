@@ -54,14 +54,11 @@
 }
 
 .divOverflow::-webkit-scrollbar{
-    width: 3px;
-    height: 2px;
+    width: 2px;
 }
 
 .divOverflow::-webkit-scrollbar-thumb {
     background-color: #838588;
-    padding: 2px;
-    border-radius: 50%;
 
 }
 

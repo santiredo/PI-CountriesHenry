@@ -25,7 +25,7 @@ body::-webkit-scrollbar{
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #ffee0069;
+  background-color: #838588;
   padding: 2px;
 }
 
@@ -37,5 +37,3 @@ h1 {
 button {
   font-family: inherit;
 }
-
-
