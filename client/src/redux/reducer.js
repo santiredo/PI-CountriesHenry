@@ -45,14 +45,16 @@ export default function rootReducer(state = initialState, {type, payload}) {
         case 'REGION':
             return {
                 ...state,
-                renderedCountries: state.renderedCountries.filter(country => country.continent === payload)
+                renderedCountries: state.renderedCountries.filter(country => country.continent === payload),
+                currentPage: 1
             }
         case 'ACTIVITY' :
             let activity = state.activities.find(activity => activity.name === payload)
 
             return {
                 ...state,
-                renderedCountries: state.renderedCountries.filter(country => activity.Countries.includes(country.name))
+                renderedCountries: state.renderedCountries.filter(country => activity.Countries.includes(country.name)),
+                currentPage: 1
             }       
 
         case 'CREATE_ACTIVITY':
@@ -68,7 +70,8 @@ export default function rootReducer(state = initialState, {type, payload}) {
         case 'SEARCH_BY_NAME':
             return {
                 ...state,
-                renderedCountries: payload
+                renderedCountries: payload,
+                currentPage: 1
             }
 
         default:

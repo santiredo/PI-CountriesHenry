@@ -51,7 +51,7 @@ export default function Filters() {
                 <div className={style.divOverflow}>
                     <p onClick={handleRegion} value='Africa'>Africa</p>
                     <p onClick={handleRegion} value='Americas'>Americas</p>
-                    <p onClick={handleRegion} value='Antarctica'>Antarctica</p>
+                    <p onClick={handleRegion} value='Antarctic'>Antarctic</p>
                     <p onClick={handleRegion} value='Asia'>Asia</p>
                     <p onClick={handleRegion} value='Europe'>Europe</p>
                     <p onClick={handleRegion} value='Oceania'>Oceania</p>

@@ -28,6 +28,9 @@ export default function Form() {
 
     useEffect(() => {
         dispatch(getAllCountries())
+    },[])
+
+    useEffect(() => {
 
         setErrors(validateForm(form))
 
@@ -46,7 +49,6 @@ export default function Form() {
                 duration: Number(form.duration)
             })
             dispatch(createActivity(form))
-            alert('Congratulations, your activity is created')
 
             setForm({
                 name:'',
@@ -302,7 +304,7 @@ export default function Form() {
                             <p onClick={handleSeason}>Winter</p>
                         </div>
                         <div className="option">
-                            <p onClick={handleSeason}>Springs</p>
+                            <p onClick={handleSeason}>Spring</p>
                         </div>
                     </div>
                 </div>
