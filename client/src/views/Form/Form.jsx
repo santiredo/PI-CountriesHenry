@@ -245,6 +245,19 @@ export default function Form() {
 
     }
 
+    // ELIMINAR UN PAIS COMO OPCION
+
+    const handleDeleteCountry = (deletedCountry) => {
+        const udpdatedCountries = [...form.Countries].filter(country => country !== deletedCountry)
+
+        setForm({
+            ...form,
+            Countries: udpdatedCountries
+        })
+
+        
+    }
+
     return (
         <div className={style.formPage} onClick={handleClickOutside}>
             <div className={style.nav}>
@@ -332,7 +345,7 @@ export default function Form() {
                             form.Countries.map(country => {
                                 return (
                                     <React.Fragment key={country}>
-                                        {form.Countries[4] !== country ? <>{country},<br/></> : `${country}`}
+                                        {<div className={style.selectedCountries}><h5 className={style.h5}>{country}</h5><p onClick={()=>{handleDeleteCountry(country)}}>X</p><br/></div>}
                                     </React.Fragment>
                                 )
                             })
