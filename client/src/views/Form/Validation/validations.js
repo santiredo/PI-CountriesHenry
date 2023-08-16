@@ -32,7 +32,7 @@ export const validateForm = ({name, difficulty, season, Countries, duration}) =>
 export const validateSubmit = ({name, difficulty, season, Countries, duration}) => {
     let errors = false
 
-    if(!name || !difficulty || !season || !Countries || !duration){
+    if(!name || !difficulty || !season || !Countries || !duration || Number(name) == name || Number(duration) != duration){
         errors = true
     }
 
