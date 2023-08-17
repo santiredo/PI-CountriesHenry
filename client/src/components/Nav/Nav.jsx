@@ -10,9 +10,9 @@ export default function() {
 
     return (
         <div className={style.nav}>
-            <NavLink to={`/home`}><img src={home} alt="" /></NavLink>
-            <NavLink to={`/form`}><img src={create} alt="" /></NavLink>
-            <NavLink to={'/activities'}><img src={activities} alt="" /></NavLink>
+            <NavLink to={`/home`}><img src={home} alt="" /><p>Home</p></NavLink>
+            <NavLink to={'/activities'}><img src={activities} alt="" /><p>Activities</p></NavLink>
+            <NavLink to={`/form`}><img src={create} alt="" /><p>Create</p></NavLink>
         </div>
     )
 }
