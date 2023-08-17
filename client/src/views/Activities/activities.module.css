@@ -64,7 +64,7 @@
 }
 
 .activityInfo p{
-    line-height: 110%;
+    line-height: 115%;
     margin: 0;
     font-size: 20px;
 }
@@ -73,10 +73,10 @@
     display: flex;
     justify-content: flex-start;
     gap: 10px;
-    font-size: 20px;
 }
 
-.activityCountries div p{
-    display: inline;
-    font-weight: 600;
+.countries{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
 }

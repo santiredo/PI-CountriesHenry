@@ -30,7 +30,7 @@ export default function() {
                                 <p>Recommended season: <b>{activity.season}</b></p>
                                 <div className={style.activityCountries}>
                                     <p>Countries:</p>
-                                    <p>
+                                    <p className={style.countries}>
                                         {
                                             activity.Countries.map(country => (
                                                 activity.Countries[activity.Countries.length-1] !== country
