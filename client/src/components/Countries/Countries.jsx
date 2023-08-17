@@ -39,36 +39,33 @@ export default function Countries() {
                     <img className={style.loadingGif} src={loadingGif} alt="" />
                 )
                 : (
-                    <>
-                    
-                    <div className={style.pagination}>
-                        <button onClick={() => handlerPagination(-1)} className={style.paginationButton}>Prev</button>
-                        <div>
-                            <p>{ currentPage - 1 > 0 && `${currentPage - 1}`}</p>
-                            <p className={style.currentPage}>{currentPage}</p>
-                            <p>{ currentPage + 1 <= lastPage && `${currentPage + 1}`}</p>                    
-                        </div>
+                    <div className={style.countriesDiv}>
+                        <div className={style.pagination}>
+                            <button onClick={() => handlerPagination(-1)} className={style.paginationButton}>Prev</button>
+                            <div>
+                                <p>{ currentPage - 1 > 0 && `${currentPage - 1}`}</p>
+                                <p className={style.currentPage}>{currentPage}</p>
+                                <p>{ currentPage + 1 <= lastPage && `${currentPage + 1}`}</p>                    
+                            </div>
 
-                        <button onClick={() => handlerPagination(1)} className={style.paginationButton}>Next</button>
+                            <button onClick={() => handlerPagination(1)} className={style.paginationButton}>Next</button>
+                        </div>
+                        <div className={style.divCountries}>
+                            {
+                                renderedCountries.map(country => (
+                                    <Country
+                                        id={country.id}
+                                        key={country.id}
+                                        name={country.name}
+                                        image={country.image}
+                                        continent={country.continent}
+                                    />
+                                ))
+                            }
+                        </div>
                     </div>
-                    <div className={style.divCountries}>
-                        {
-                            renderedCountries.map(country => (
-                                <Country
-                                    id={country.id}
-                                    key={country.id}
-                                    name={country.name}
-                                    image={country.image}
-                                    continent={country.continent}
-                                />
-                            ))
-                        }
-                    </div>
-                    </>
-                    
                 )
             }
-            
         </div>
     )
 }
