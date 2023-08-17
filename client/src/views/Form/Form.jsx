@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Nav from '../../components/Nav/Nav';
 import { createActivity, getAllCountries } from '../../redux/action';
-
+import { validateForm, validateSubmit } from './Validation/validations';
+import creativity from '../../assets/creativityGif.gif'
 import './form.css'
 import style from './form.module.css'
-import { validateForm, validateSubmit } from './Validation/validations';
 
 
 export default function Form() {
@@ -263,6 +263,7 @@ export default function Form() {
             <div className={style.nav}>
                 <Nav/> 
             </div>
+            <img className={style.creativityGif} src={creativity} alt="" />
             <h1>Time to create an Activity</h1>
             <form onSubmit={submitHandler}>
                 <div className='selectBox'>

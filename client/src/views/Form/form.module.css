@@ -5,7 +5,13 @@
     color: #000000cc;
     height: 100vh;
     width: 100%;
-    background-color: #ffffff9d;
+    background-color: #838588;
+}
+
+.creativityGif{
+    position: absolute;
+    right: 3%;
+    top: 10%;
 }
 
 .formPage h1{
@@ -14,9 +20,9 @@
 
 .nav{
     position: absolute;
-    width: 15%;
-    left: 0.75%;
-    top: 20px;
+    width: 14.99%;
+    left: 1.125%;
+    top: 10px;
 }
 
 .formPage form{
