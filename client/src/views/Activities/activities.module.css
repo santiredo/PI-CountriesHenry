@@ -1,0 +1,82 @@
+.activitiesPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../../assets/activitiesBackground.jpg');
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.nav{
+    position: absolute;
+    width: 14.99%;
+    left: 1.125%;
+    top: 10px;
+}
+
+.activitiesDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 20px;
+    width: 80%;
+    height: 65%;
+    overflow: auto;
+    background-color: #ffffff9d;
+}
+
+.activitiesDiv::-webkit-scrollbar{
+    width: 2px;
+}
+
+.activitiesDiv::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    padding: 2px;
+}
+
+.activityDiv{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    background-color: #83858899;
+}
+
+.activityDiv h2{
+    margin: 0;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+
+}
+
+.activityInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: start;
+    gap: 15px;
+    padding-bottom: 25px;
+    width: 80%;
+}
+
+.activityInfo p{
+    line-height: 110%;
+    margin: 0;
+    font-size: 20px;
+}
+
+.activityCountries{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    font-size: 20px;
+}
+
+.activityCountries div p{
+    display: inline;
+    font-weight: 600;
+}

@@ -5,6 +5,7 @@ import Landing from './views/Landing/Landing'
 import Detail from './views/Detail/Detail'
 import Form from './views/Form/Form'
 import './App.css'
+import Activities from './views/Activities/Activities'
 
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
           <Route path='/home' element={<Home/>} />
           <Route path='/detail/:id' element={<Detail/>} />
           <Route path='/form' element={<Form/>} />
+          <Route path='/activities' element={<Activities/>} />
         </Routes>
       </>
     )
