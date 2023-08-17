@@ -32,7 +32,9 @@ export const validateForm = ({name, difficulty, season, Countries, duration}) =>
 export const validateSubmit = ({name, difficulty, season, Countries, duration}) => {
     let errors = false
 
-    if(!name || !difficulty || !season || !Countries || !duration || Number(name) == name || Number(duration) != duration){
+    let nameRegex = /^[a-zA-Z\s]+$/
+
+    if(!name || !nameRegex.test(name) || !difficulty || !season || Countries.length === 0 || !duration || Number(duration) != duration){
         errors = true
     }
 
