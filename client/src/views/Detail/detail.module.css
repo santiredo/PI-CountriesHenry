@@ -10,7 +10,8 @@
 
 .nav{
     position: absolute;
-    left: 47px;
+    width: 15%;
+    left: 0.75%;
     top: 20px;
 }
 

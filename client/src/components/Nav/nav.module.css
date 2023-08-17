@@ -1,6 +1,7 @@
 .nav{
     display: flex;
-    gap: 30px;
+    width: 90%;
+    justify-content: space-between;
 }
 
 .nav a{
