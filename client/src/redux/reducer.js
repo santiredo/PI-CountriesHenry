@@ -46,9 +46,10 @@ export default function rootReducer(state = initialState, {type, payload}) {
                 })
             }
         case 'REGION':
+
             return {
                 ...state,
-                renderedCountries: state.renderedCountries.filter(country => country.continent === payload),
+                renderedCountries: state.allCountries.filter(country => country.continent === payload ),
                 currentPage: 1
             }
         case 'ACTIVITY' :
@@ -56,7 +57,7 @@ export default function rootReducer(state = initialState, {type, payload}) {
 
             return {
                 ...state,
-                renderedCountries: state.renderedCountries.filter(country => activity.Countries.includes(country.name)),
+                renderedCountries: state.allCountries.filter(country => activity.Countries.includes(country.name)),
                 currentPage: 1
             }       
 
