@@ -6,6 +6,7 @@ const initialState = {
     currentPage: 1,
     countryDetails: [],
     loadingDetails: true,
+    loadingActivities: true,
     activities: []
 }
 
@@ -18,7 +19,8 @@ export default function rootReducer(state = initialState, {type, payload}) {
                 allCountries: payload,
                 renderedCountries: payload,
                 loadingHome: false,
-                loadingDetails: true
+                loadingDetails: true,
+                loadingActivities: true
             }
         case 'SET_PAGE':
             return {
@@ -30,7 +32,8 @@ export default function rootReducer(state = initialState, {type, payload}) {
                 ...state,
                 countryDetails: payload,
                 loadingDetails: false,
-                loadingHome: true
+                loadingHome: true,
+                loadingActivities: true
             }
         case 'ORDER':
             return {
@@ -65,7 +68,8 @@ export default function rootReducer(state = initialState, {type, payload}) {
         case 'GET_ACTIVITIES':
             return {
                 ...state,
-                activities: payload
+                activities: payload,
+                loadingActivities: false
             }
         case 'SEARCH_BY_NAME':
             if(payload.length === 0) {

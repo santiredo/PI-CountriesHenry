@@ -15,6 +15,7 @@ export default function Form() {
 
     
     const dispatch = useDispatch()
+    const activities = useSelector(state => state.activities)
 
     const [form, setForm] = useState({
         name:'',
@@ -34,13 +35,13 @@ export default function Form() {
 
         setErrors(validateForm(form))
 
-        console.log(errors)
-        console.log(form)
     },[form])
 
 
     const submitHandler = (event) => {
         event.preventDefault()
+        console.log(activities)
+        console.log(form.Countries)
 
         if(!validateSubmit(form)){
             setForm({
