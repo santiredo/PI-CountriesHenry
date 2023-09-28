@@ -121,3 +121,23 @@ export const searchByName = (name) => {
         }
     }
 }
+
+export const deleteActivity = (id) => {
+
+    return async(dispatch) => {
+        try {
+
+            const response = await axios.delete(`http://localhost:3001/activities/${id}`)
+
+            console.log(response.data)
+
+            return dispatch({
+                type: 'DELETE_ACTIVITY',
+                payload: response.data
+            })
+            
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+}
