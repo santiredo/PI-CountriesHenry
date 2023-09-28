@@ -82,6 +82,11 @@ export default function rootReducer(state = initialState, {type, payload}) {
                     currentPage: 1
                 }
             }
+        case 'DELETE_ACTIVITY':
+            return {
+                ...state,
+                activities: payload
+            }
 
         default:
             return state;
