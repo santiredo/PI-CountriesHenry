@@ -25,6 +25,7 @@
     height: 65%;
     overflow: auto;
     background-color: #ffffff9d;
+    position: relative;
 }
 
 .activitiesDiv::-webkit-scrollbar{
@@ -79,4 +80,16 @@
     display: flex;
     flex-direction: column;
     font-size: 20px;
+}
+
+.deleteBin{
+    position: absolute;
+    right: 35px;
+    top: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
+.deleteBin:hover {
+    transform: rotate(10deg) scale(1.05);
 }
