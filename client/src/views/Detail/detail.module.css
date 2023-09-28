@@ -31,6 +31,7 @@
     left: 12.5%;
     width: 75%;
     height: 75vh;
+    border-top: 1px dotted #838588;
 }
 
 .detailsDiv::-webkit-scrollbar{
@@ -38,8 +39,8 @@
 }
 
 .detailsDiv::-webkit-scrollbar-thumb {
-    background-color: #838588;
-    padding: 2px;
+    background-color: #ffffff;
+
 }
 
 .infoContainer{
@@ -66,4 +67,6 @@
     background-color: #000000de;
     opacity: 0.8;
     z-index: -1;
+    padding-right: 10px;
+    border: 1px dotted #838588;
 }
