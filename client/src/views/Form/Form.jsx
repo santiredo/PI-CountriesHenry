@@ -103,10 +103,6 @@ export default function Form() {
 
         if(form.Countries.length > 4){
             alert('Only 5 countries are available at the same time')
-            setForm({
-                ...form,
-                Countries: [event.target.innerText]
-            })
         } else {
             setForm({
                 ...form,
