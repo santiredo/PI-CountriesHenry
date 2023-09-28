@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { getActivities } from "../../redux/action"
+import { deleteActivity, getActivities } from "../../redux/action"
 import Nav from "../../components/Nav/Nav"
+import bin from '../../assets/delete.png'
 import style from './activities.module.css'
 
 
@@ -11,10 +12,18 @@ export default function() {
     const dispatch = useDispatch()
     const loading = useSelector(state => state.loadingActivities)
 
+    console.log(activities)
+
     useEffect( () => {
         dispatch(getActivities())
 
     },[dispatch])
+
+    const handleDelete = (id) => {
+
+        dispatch(deleteActivity(id))
+
+    }
 
     return (
         <div className={style.activitiesPage}>
@@ -49,6 +58,7 @@ export default function() {
                                             </p>
                                         </div>
                                     </div>
+                                    <img onClick={() => handleDelete(activity.id)} className={style.deleteBin} src={bin} alt="" />
                                 </div>
                             ))
                         }
