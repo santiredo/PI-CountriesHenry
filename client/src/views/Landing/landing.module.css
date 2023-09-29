@@ -20,11 +20,9 @@
 
 .title{
     color: #ffffff;
+    position: absolute;
     margin: 0;
     font-size: 100px;
-    position: absolute;
-    top: calc(50% - 120px);
-    left: calc(50% - 720px);
     z-index: 1;
     opacity: 0.8;
 }

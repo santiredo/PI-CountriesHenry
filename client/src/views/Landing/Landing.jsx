@@ -65,7 +65,7 @@ export default function Landing () {
       <div className={style.landingPage}> {/* Corregido aquí */}
         <canvas onClick={handleHome} ref={canvasRef} className={!isHovering ? style.canvas : style.canvasHover} />
         {
-            isHovering && <h1 className={style.title}>Click to see the project</h1>
+            isHovering && <h1 className={style.title}>Click to log in</h1>
         }
       </div>
     );
