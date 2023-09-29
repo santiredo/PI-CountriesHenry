@@ -5,9 +5,11 @@ const postActivityHandler = async(req, res) => {
 
     try {
 
+        const {id} = req.params
+
         const {name, difficulty, duration, season, Countries} = req.body
 
-        const activity = await postActivity(name, difficulty, duration, season, Countries)
+        const activity = await postActivity(name, difficulty, duration, season, Countries, id)
 
         res.status(200).json(activity)
         

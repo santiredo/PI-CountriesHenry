@@ -1,7 +1,7 @@
-const { Activity, Country } = require("../db")
+const { Activity, Country, User } = require("../db")
 
 
-const postActivity = async(name, difficulty, duration, season, Countries) => {
+const postActivity = async(name, difficulty, duration, season, Countries, id) => {
 
     try {
 
@@ -15,15 +15,18 @@ const postActivity = async(name, difficulty, duration, season, Countries) => {
             }
         })
 
+        console.log(id, typeof id)
+
         const newActivity = await Activity.create({
             name,
             difficulty,
             duration,
             season,
+            UserId: id.toString()
         })
 
-        await newActivity.addCountries(assignedCountries)
-
+       /*  await newActivity.addCountries(assignedCountries)
+ */
         return newActivity
         
     } catch (error) {
