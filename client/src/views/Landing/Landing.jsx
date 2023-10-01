@@ -58,7 +58,7 @@ export default function Landing () {
     const navigate = useNavigate()
 
     const handleHome = () => {
-        isHovering && navigate('/home')
+        isHovering && navigate('/hall')
     }
   
     return (
