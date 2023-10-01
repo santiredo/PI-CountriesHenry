@@ -6,6 +6,7 @@ import Detail from './views/Detail/Detail'
 import Form from './views/Form/Form'
 import './App.css'
 import Activities from './views/Activities/Activities'
+import Hall from './views/Hall/Hall'
 
 
 export default function App() {
@@ -19,6 +20,14 @@ export default function App() {
         <Routes>
           <Route path='/' element={<Landing/>}/>
         </Routes>
+      </>
+    )
+  } else if (location.pathname === '/'){
+    return (
+      <>
+      <Routes>
+        <Route path='/hall' element={<Hall/>}/>
+      </Routes>
       </>
     )
   } else {
