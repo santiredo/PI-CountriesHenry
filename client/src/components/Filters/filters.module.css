@@ -26,12 +26,6 @@
     transform: rotate(-45deg) scale(1.1);
 }
 
-.allFilters p{
-    color: #cdcdcd;
-    margin: 5px 0;
-    width: 95%;
-}
-
 .divOverflow{
     display: flex;
     align-items: center;
@@ -62,8 +56,29 @@
 
 }
 
+.allFilters p{
+    position: relative;
+    color: #cdcdcd;
+    margin: 5px 0;
+    width: 95%;
+}
+
 .allFilters p:hover{
     cursor: pointer;
     background-color: #838588;
     color: #000000;
+}
+
+.activeFilter{
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    background-color: #cdcdcd;
+    top: calc(50% - 2.5px);
+    left: 15%;
+}
+
+.allFilters p:hover .activeFilter{
+    background-color: #000000;
 }
