@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import background from '../../assets/landingBackground.png';
 import style from './landing.module.css';
 import { useNavigate } from 'react-router-dom';
+import Hall from '../Hall/Hall';
 
 export default function Landing () {
     const canvasRef = useRef(null);
@@ -10,6 +11,7 @@ export default function Landing () {
     const backgroundColor = [0, 0, 0]; // Valor RGB del color de fondo
   
     useEffect(() => {
+
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
 
@@ -26,8 +28,9 @@ export default function Landing () {
         canvas.addEventListener('mousemove', handleMouseMove);
 
         return () => {
-        canvas.removeEventListener('mousemove', handleMouseMove);
+            canvas.removeEventListener('mousemove', handleMouseMove);
         };
+
     }, []);
 
     useEffect(() => {
@@ -51,21 +54,24 @@ export default function Landing () {
         pixel[2] !== backgroundColor[2]
         );
 
-        setIsHovering(isPixelBackground);
-
+        setIsHovering(isPixelBackground)    
     };
 
-    const navigate = useNavigate()
+    const [login, setLogin] = useState(false)
 
     const handleHome = () => {
-        isHovering && navigate('/hall')
+        setLogin(true)
+        setIsHovering(false)
     }
   
     return (
       <div className={style.landingPage}> {/* Corregido aquí */}
         <canvas onClick={handleHome} ref={canvasRef} className={!isHovering ? style.canvas : style.canvasHover} />
         {
-            isHovering && <h1 className={style.title}>Click to log in</h1>
+            isHovering && !login && <h1 className={style.title}>Click to log in</h1>
+        }
+        {
+            login && <Hall/>
         }
       </div>
     );

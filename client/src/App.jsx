@@ -22,14 +22,6 @@ export default function App() {
         </Routes>
       </>
     )
-  } else if (location.pathname === '/hall'){
-    return (
-      <>
-      <Routes>
-        <Route path='/hall' element={<Hall/>}/>
-      </Routes>
-      </>
-    )
   } else {
     return (
       <>
