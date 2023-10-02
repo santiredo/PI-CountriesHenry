@@ -22,7 +22,7 @@ export default function App() {
         </Routes>
       </>
     )
-  } else if (location.pathname === '/'){
+  } else if (location.pathname === '/hall'){
     return (
       <>
       <Routes>
