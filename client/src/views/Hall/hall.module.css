@@ -3,29 +3,137 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
+    padding-top: 2.5vh;
+    height: 97.5vh;
     width: 100%;
-    min-height: 100vh;
-    background-color: #838588d2;
-    z-index: 1001;
+    background-color: #838588dd;
+    z-index: 999;
 }
 
 .formTitle{
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 10%;
-    width: 80%;
+    justify-content: space-between;
+    width: 60%;
 }
 
 .titleActive{
-    cursor: pointer;
+    width: 50%;
+    margin-bottom: 7.5vh;
 }
 
 .inactiveTitle{
+    width: 50%;
+    margin-bottom: 7.5vh;
     color: #00000085;
+    cursor: pointer;
+}
+
+.inactiveTitle:hover{
+    color: #000000c4;
 }
 
 .formTitle h2{
     font-size: 38px;
+}
+
+.hallPage label{
+    font-size: 20px;
+    padding-left: 15px;
+}
+
+.bothLoginRegister{
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+
+.hiddenDiv{
+    opacity: 0;
+    width: 45%;
+}
+
+.submit{
+    border: none;
+    height: 40px;
+    background-image: url('../../assets/landingBackground.png');
+    background-size: 400%;
+    background-position: 50% 50%;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.submit:hover{
+    border: none;
+    opacity: 0.8;
+}
+
+.bothLoginRegister input{
+    width: 95%;
+    padding: 0 2.5%;
+    margin-bottom: 3%;
+    border: none;
+    height: 30px;
+    font-family:'Courier New';
+    font-size: 20px;
+}
+
+.bothLoginRegister input:focus{
+    outline: none;
+}
+
+.loginDiv{
+    display: flex;
+    padding-left: 2.5%;
+    width: 45%;
+    flex-direction: column;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.googleLogin span{
+    display: none;
+}
+
+.googleLogin::after{
+    color: #000000;
+    display: inline-block;
+    width: 70%;
+    content: 'Log in with Google';
+    font-family:'Courier New';
+}
+
+.registerDiv{
+    display: flex;
+    padding-right: 2.5%;
+    width: 45%;
+    flex-direction: column;
+    font-family:'Courier New';
+    font-size: 15px;
+}
+
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.googleRegister span{
+    display: none;
+}
+
+.googleRegister::after{
+    color: #000000;
+    display: inline-block;
+    width: 70%;
+    content: 'Sign up with Google';
+    font-family:'Courier New';
+    font-size: 15px;
 }
