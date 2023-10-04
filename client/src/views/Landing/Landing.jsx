@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import background from '../../assets/landingBackground.png';
 import style from './landing.module.css';
-import { useNavigate } from 'react-router-dom';
 import Hall from '../Hall/Hall';
 
 export default function Landing () {
