@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { gapi } from 'gapi-script'
 import GoogleLogin from 'react-google-login'
+import axios from 'axios'
 import style from './hall.module.css';
+import { validateRegister } from './validation';
 
 export default function Hall () {
 
@@ -34,7 +36,7 @@ export default function Hall () {
     // AQUI MANEJAMOS LA DATA DE LOGIN
 
     const [loginData, setLoginData] = useState({
-        username: '',
+        email: '',
         password: ''
     })
 
@@ -65,25 +67,43 @@ export default function Hall () {
 
     const [login, setLogin] = useState(true)
 
-    const handleLogin = () =>{
+    const selectLogin = () =>{
         setLogin(true)
     }
 
-    const handleRegister = () => {
+    const selectRegister = () => {
         setLogin(false)
+    }
+
+    // ACA MANDAMOS EL MAIL A VERIFICACION
+
+    const handleRegisterSubmit = async(event) => {
+        event.preventDefault()
+
+        const errors = validateRegister(registerData)
+
+        console.log(errors)
+
+        if(!errors) {
+            const {username, email, password} = registerData
+            console.log(username, typeof username, email, typeof email, password, typeof password)
+            const newUser = await axios.post(`http://localhost:3001/user`, {username, email, password})
+
+            console.log(newUser)
+        }
     }
   
     return (
       <div className={style.hallPage}>
         <div className={style.formTitle}>
-            <h1 onClick={handleLogin} className={login ? style.titleActive : style.inactiveTitle}>Log in</h1>
+            <h1 onClick={selectLogin} className={login ? style.titleActive : style.inactiveTitle}>Log in</h1>
             <h2>|</h2>
-            <h1 onClick={handleRegister} className={!login ? style.titleActive : style.inactiveTitle}>Register</h1>
+            <h1 onClick={selectRegister} className={!login ? style.titleActive : style.inactiveTitle}>Register</h1>
         </div>
         <div className={style.bothLoginRegister}>
             <div className={login ? style.loginDiv : style.hiddenDiv}>
                 <form className={style.loginForm}>
-                    <input type="text" name="username" value={loginData.username} onChange={loginChange} placeholder='Username'/>
+                    <input type="text" name="email" value={loginData.email} onChange={loginChange} placeholder='example@whatever.com'/>
                     <input type="password" name="password" value={loginData.password} onChange={loginChange} placeholder='Password'/>
                     <button className={style.submit}> Submit </button>
                 </form>
@@ -99,9 +119,10 @@ export default function Hall () {
             <div className={!login ? style.registerDiv : style.hiddenDiv}>
                 <form className={style.registerForm}>
                     <input type="text" name="username" value={registerData.username} onChange={registerChange} placeholder='Username'/>
+                    <input type="text" name="email" value={registerData.email} onChange={registerChange} placeholder='example@whatever.com'/>
                     <input type="password" name="password" value={registerData.password} onChange={registerChange} placeholder='Password'/>
                     <input type="password" name="repeatedPassword" value={registerData.repeatedPassword} onChange={registerChange} placeholder='Repeat password'/>
-                    <button className={style.submit}> Submit </button>
+                    <button className={style.submit} onClick={handleRegisterSubmit}> Submit </button>
                 </form>
                 <h4>----- Or -----</h4>
                 <GoogleLogin
