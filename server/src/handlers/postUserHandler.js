@@ -5,11 +5,13 @@ const postUserHandler = async(req, res) => {
 
     try {
 
-        const {name, email} = req.body
+        const {username, email, password} = req.body
 
-        const user = await postUser(name, email)
+        console.log(username, email, password)
 
-        res.status(200).json(user)
+        const newUser = await postUser(username, email, password)
+
+        res.status(200).json(newUser)
         
     } catch (error) {
         return res.status(500).json({ error: error.message });
