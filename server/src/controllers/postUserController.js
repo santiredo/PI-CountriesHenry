@@ -27,7 +27,7 @@ const postUser = async(username, email, password) => {
 
             console.log(userEmail)
 
-            if(userEmail) throw new Error('This email is already in use')
+            if(userEmail) return 'This email is already in use, try using another one'
 
             const userName = await User.findOne({
                 where:{
@@ -35,7 +35,7 @@ const postUser = async(username, email, password) => {
                 }
             })
 
-            if(userName) throw new Error('This username is already in use')
+            if(userName) return 'This username is already in use, try using another one'
 
             const newUser = await User.create({
                 name: username,
@@ -45,7 +45,7 @@ const postUser = async(username, email, password) => {
 
             return newUser
         } else {
-            throw new Error('The email you provide does not exist')
+            return `${email} does not exist`
         }
 
     } catch (error) {
