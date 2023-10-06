@@ -24,9 +24,9 @@
 
 .loadingGif{
     position: absolute;
-    top: calc(50% - 75px);
-    width: 200px;
-    height: 150px;
+    top: calc(50% - 50px);
+    width: 100px;
+    height: 100px;
 }
 
 .pagination{
