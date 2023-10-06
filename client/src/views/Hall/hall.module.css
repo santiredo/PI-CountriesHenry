@@ -4,14 +4,68 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 2.5vh;
-    height: 97.5vh;
+    height: 100vh;
     width: 100%;
     background-color: #838588dd;
     z-index: 999;
 }
 
+.loadingDiv{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 1000;
+    background-color: #0000004e;
+}
+
+.loadingDiv img{
+    width: 100px;
+    height: 100px;
+}
+
+.registerError{
+    padding: 20px 10px 20px 10px;
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #9d4f4f;
+    box-shadow: 10px 10px 20px #000000;
+    animation: registerError 1s forwards
+}
+
+@keyframes registerError {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.registerError h1{
+    margin: 0;
+}
+
+.registerError button{
+    width: 30%;
+    height: 30px;
+    border: none;
+    background-color: #838588dd;
+    box-shadow: 2px 2px 5px #000000;
+    cursor: pointer;
+}
+
+.registerError button:hover{
+    box-shadow: none;
+}
+
 .formTitle{
+    padding-top: 2.5vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -44,6 +98,7 @@
 }
 
 .bothLoginRegister{
+    padding-top: 2.5vh;
     width: 60%;
     display: flex;
     flex-direction: row;
