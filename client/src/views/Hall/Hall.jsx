@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { gapi } from 'gapi-script'
 import GoogleLogin from 'react-google-login'
 import axios from 'axios'
-import style from './hall.module.css';
 import { validateRegister } from './validation';
+import loadingGif from '../../assets/loadingGif.gif'
+import style from './hall.module.css';
+
 
 export default function Hall () {
 
@@ -63,6 +65,20 @@ export default function Hall () {
         })
     }
 
+    //  Errores del registro
+
+    const [registerErrors, setRegisterErrors] = useState()
+
+    const handleRegisterErrors = () => {
+        setRegisterErrors(null)
+        setRegisterData({
+            username: '',
+            email: '',
+            password: '',
+            repeatedPassword: ''
+        })        
+    }
+
     // Aca manejamos los estilos de los formularios
 
     const [login, setLogin] = useState(true)
@@ -77,6 +93,8 @@ export default function Hall () {
 
     // ACA MANDAMOS EL MAIL A VERIFICACION
 
+    const [loading, setLoading] = useState(false)
+
     const handleRegisterSubmit = async(event) => {
         event.preventDefault()
 
@@ -85,16 +103,46 @@ export default function Hall () {
         console.log(errors)
 
         if(!errors) {
-            const {username, email, password} = registerData
-            console.log(username, typeof username, email, typeof email, password, typeof password)
-            const newUser = await axios.post(`http://localhost:3001/user`, {username, email, password})
+            setLoading(true)
+            try {
+                const {username, email, password} = registerData
+                const newUser = await axios.post(`http://localhost:3001/user`, {username, email, password})
 
-            console.log(newUser)
+                typeof newUser.data !== 'string' ? (
+                    localStorage.setItem('userData', JSON.stringify({id:newUser.data.id, email:email, username: username})),
+                    setLoading(false),
+                    navigate('/home')
+                ) : (
+                    setLoading(false),
+                    setRegisterErrors(newUser.data)
+                )
+                
+            } catch (error) {
+                console.log(error)
+            }           
         }
     }
   
     return (
       <div className={style.hallPage}>
+        {
+            loading && (
+                <div className={style.loadingDiv}>
+                    <img src={loadingGif} alt="" />
+                </div>
+            )            
+        }
+        {
+            !loading && registerErrors && (
+                <div className={style.loadingDiv}>
+                    <div className={style.registerError}>
+                        <h1>Ups!</h1>
+                        <h2>{registerErrors}</h2>
+                        <button onClick={handleRegisterErrors}>Ok</button>
+                    </div>
+                </div>
+            )
+        }
         <div className={style.formTitle}>
             <h1 onClick={selectLogin} className={login ? style.titleActive : style.inactiveTitle}>Log in</h1>
             <h2>|</h2>
