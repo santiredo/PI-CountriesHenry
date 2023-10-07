@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { gapi } from 'gapi-script'
 import GoogleLogin from 'react-google-login'
 import axios from 'axios'
-import { validateRegister } from './validation';
+import { validateLogin, validateRegister } from './validation';
 import loadingGif from '../../assets/loadingGif.gif'
+import Swal from 'sweetalert2';
 import style from './hall.module.css';
 
 
@@ -12,18 +13,7 @@ export default function Hall () {
 
     const clientID = '295685867400-74qe6ef395rqe5f6nbnlse6dkq505qmv.apps.googleusercontent.com'
 
-    const [userData, setUserData] = useState({})
-
     const navigate = useNavigate()
-
-    const onSuccess = async(response) => {
-        setUserData(response.profileObj)
-        navigate('/home')
-    }
-
-    const onFailure = (response) => {
-        console.log(response)
-    }
 
     useEffect(() => {
         const start = () => {
@@ -34,6 +24,79 @@ export default function Hall () {
 
         gapi.load('client:auth2', start)
     }, [])
+
+    // ACA CREAMOS EL USUARIO EN LA BASE DE DATOS
+
+    const registerUser = async(username, email, password) => {
+
+        setLoading(true)
+        try {
+            const newUser = await axios.post(`http://localhost:3001/user`, {username, email, password})
+
+            typeof newUser.data !== 'string' ? (
+                localStorage.setItem('userData', JSON.stringify({id:newUser.data.id, email:email, username: username})),
+                setLoading(false),
+                Swal.fire(`Congratulations ${username}`, `Continue to see the prject`, `success`),
+                navigate('/home')
+            ) : (
+                setLoading(false),
+                Swal.fire(`Ups`, `${newUser.data}`, `error`),
+                setRegisterData({
+                    username: '',
+                    email: '',
+                    password: '',
+                    repeatedPassword: ''
+                })
+            )
+            
+        } catch (error) {
+            console.log(error)
+        }   
+    }
+
+    // ACA CREAMOS LA FUNCION PARA INGRESAR CON LOGIN
+
+    const loginHandler = async(email, password) => {
+        setLoading(true)
+        if(!password){
+            try {
+                const logedUser = await axios(`http://localhost:3001/user`, {email: email})
+
+                !logedUser
+                ? Swal.fire(`Upss`, `${email} does not exist in the data base, please create an account`, `error`)
+                : (
+                    setLoading(false),
+                    Swal.fire(`Welcome back ${logedUser.name}`, `success`),
+                    navigate('/home')
+                )
+
+            } catch (error) {
+                console.log(error)
+            }
+        } else{
+            try {
+                console.log(email)
+                const logedUser = await axios.get(`http://localhost:3001/user?email=${email}`)
+
+                if(!logedUser){
+                    Swal.fire(`Upss`, `${email} does not exist in the data base, please create an account`, `error`)
+                } else{
+                    setLoading(false)
+                    logedUser.data.password === password
+                    ? (
+                        Swal.fire(`Welcome back ${logedUser.data.name}`, `success`),
+                        navigate('/home')
+                    ):(
+                        Swal.fire(`Ups`, `The password didnt match the user`, 'error')
+                    )
+                }
+                
+            } catch (error) {
+                
+            }
+
+        }
+    }
 
     // AQUI MANEJAMOS LA DATA DE LOGIN
 
@@ -47,9 +110,40 @@ export default function Hall () {
             ...loginData,
             [event.target.name]: event.target.value
         })
+    }   
+
+    // Aca manejamos el submit del login
+
+    const handleLoginSubmit = (event) => {
+        event.preventDefault()
+
+        setLoading(true)
+
+        const errors = validateLogin(loginData)
+
+        !errors
+        ? loginHandler(loginData.email, loginData.password)
+        : (
+            setLoading(false),
+            Swal.fire('Ups', `You must complete the form correctly`, `error`)
+        )
     }
 
-    //AQUI MANEJAMOS LA DATA DEL REGISTER
+    //Aca manejamos el login con google
+
+    const [userData, setUserData] = useState({})
+
+    const googleLogin = async(response) => {
+        setUserData(response.profileObj)
+
+        loginHandler(response.profileObj.email)
+    }
+
+    const loginFailure = (response) => {
+        console.log(response)
+    }
+
+    //AQUI MANEJAMOS LA DATA DEL REGISTRO
 
     const [registerData, setRegisterData] = useState({
         username: '',
@@ -65,33 +159,7 @@ export default function Hall () {
         })
     }
 
-    //  Errores del registro
-
-    const [registerErrors, setRegisterErrors] = useState()
-
-    const handleRegisterErrors = () => {
-        setRegisterErrors(null)
-        setRegisterData({
-            username: '',
-            email: '',
-            password: '',
-            repeatedPassword: ''
-        })        
-    }
-
-    // Aca manejamos los estilos de los formularios
-
-    const [login, setLogin] = useState(true)
-
-    const selectLogin = () =>{
-        setLogin(true)
-    }
-
-    const selectRegister = () => {
-        setLogin(false)
-    }
-
-    // ACA MANDAMOS EL MAIL A VERIFICACION
+    // Manejamos el submit del registro
 
     const [loading, setLoading] = useState(false)
 
@@ -103,24 +171,43 @@ export default function Hall () {
         console.log(errors)
 
         if(!errors) {
-            setLoading(true)
-            try {
-                const {username, email, password} = registerData
-                const newUser = await axios.post(`http://localhost:3001/user`, {username, email, password})
-
-                typeof newUser.data !== 'string' ? (
-                    localStorage.setItem('userData', JSON.stringify({id:newUser.data.id, email:email, username: username})),
-                    setLoading(false),
-                    navigate('/home')
-                ) : (
-                    setLoading(false),
-                    setRegisterErrors(newUser.data)
-                )
-                
-            } catch (error) {
-                console.log(error)
-            }           
+            const {username, email, password} = registerData
+            registerUser(username, email, password)
         }
+    }
+
+    // Aca manejamos el registro con google
+
+    const googleRegistration = async(response) => {
+        setUserData(response.profileObj)
+
+        console.log((Math.round(Math.random()*10)).toString())
+        
+        const email = response.profileObj.email
+        const username = response.profileObj.email.split('@')[0]
+        let password = ''
+
+        for(let i = 0; i < 10; i++){
+            password += (Math.round(Math.random()*10)).toString()
+        }
+
+        registerUser(username, email, password)
+    }
+
+    const registerFailure = (response) => {
+        console.log(response)
+    }
+
+    // Aca manejamos los estilos de los formularios
+
+    const [loginCSS, setLoginCSS] = useState(true)
+
+    const selectLogin = () =>{
+        setLoginCSS(true)
+    }
+
+    const selectRegister = () => {
+        setLoginCSS(false)
     }
   
     return (
@@ -132,39 +219,28 @@ export default function Hall () {
                 </div>
             )            
         }
-        {
-            !loading && registerErrors && (
-                <div className={style.loadingDiv}>
-                    <div className={style.registerError}>
-                        <h1>Ups!</h1>
-                        <h2>{registerErrors}</h2>
-                        <button onClick={handleRegisterErrors}>Ok</button>
-                    </div>
-                </div>
-            )
-        }
         <div className={style.formTitle}>
-            <h1 onClick={selectLogin} className={login ? style.titleActive : style.inactiveTitle}>Log in</h1>
+            <h1 onClick={selectLogin} className={loginCSS ? style.titleActive : style.inactiveTitle}>Log in</h1>
             <h2>|</h2>
-            <h1 onClick={selectRegister} className={!login ? style.titleActive : style.inactiveTitle}>Register</h1>
+            <h1 onClick={selectRegister} className={!loginCSS ? style.titleActive : style.inactiveTitle}>Register</h1>
         </div>
         <div className={style.bothLoginRegister}>
-            <div className={login ? style.loginDiv : style.hiddenDiv}>
+            <div className={loginCSS ? style.loginDiv : style.hiddenDiv}>
                 <form className={style.loginForm}>
                     <input type="text" name="email" value={loginData.email} onChange={loginChange} placeholder='example@whatever.com'/>
                     <input type="password" name="password" value={loginData.password} onChange={loginChange} placeholder='Password'/>
-                    <button className={style.submit}> Submit </button>
+                    <button className={style.submit} onClick={handleLoginSubmit}> Submit </button>
                 </form>
                 <h4>----- Or -----</h4>
                 <GoogleLogin
                     className={style.googleLogin}
                     clientId={clientID}
-                    onSuccess={onSuccess}
-                    onFailure={onFailure}
+                    onSuccess={googleLogin}
+                    onFailure={loginFailure}
                     cookiePolicy={`single_host_policy`}
                 />
             </div>
-            <div className={!login ? style.registerDiv : style.hiddenDiv}>
+            <div className={!loginCSS ? style.registerDiv : style.hiddenDiv}>
                 <form className={style.registerForm}>
                     <input type="text" name="username" value={registerData.username} onChange={registerChange} placeholder='Username'/>
                     <input type="text" name="email" value={registerData.email} onChange={registerChange} placeholder='example@whatever.com'/>
@@ -176,8 +252,8 @@ export default function Hall () {
                 <GoogleLogin
                     className={style.googleRegister}
                     clientId={clientID}
-                    onSuccess={onSuccess}
-                    onFailure={onFailure}
+                    onSuccess={googleRegistration}
+                    onFailure={registerFailure}
                     cookiePolicy={`single_host_policy`}
                 />
             </div>
