@@ -60,13 +60,15 @@ export default function Hall () {
         setLoading(true)
         if(!password){
             try {
-                const logedUser = await axios(`http://localhost:3001/user`, {email: email})
+                const logedUser = await axios(`http://localhost:3001/user?email=${email}`)
 
-                !logedUser
-                ? Swal.fire(`Upss`, `${email} does not exist in the data base, please create an account`, `error`)
-                : (
+                !logedUser.data
+                ? (
                     setLoading(false),
-                    Swal.fire(`Welcome back ${logedUser.name}`, `success`),
+                    Swal.fire(`Upss`, `${email} does not exist in the data base, please create an account`, `error`)
+                ) : (
+                    setLoading(false),
+                    Swal.fire(`Welcome back ${logedUser.data.name}`, `success`),
                     navigate('/home')
                 )
 
@@ -75,12 +77,9 @@ export default function Hall () {
             }
         } else{
             try {
-                console.log(email)
                 const logedUser = await axios.get(`http://localhost:3001/user?email=${email}`)
 
-                if(!logedUser){
-                    Swal.fire(`Upss`, `${email} does not exist in the data base, please create an account`, `error`)
-                } else{
+                if(logedUser.data){
                     setLoading(false)
                     logedUser.data.password === password
                     ? (
@@ -89,6 +88,9 @@ export default function Hall () {
                     ):(
                         Swal.fire(`Ups`, `The password didnt match the user`, 'error')
                     )
+                } else{
+                    setLoading(false)
+                    Swal.fire(`Upss`, `${email} does not exist in the data base, please create an account`, `error`)
                 }
                 
             } catch (error) {
@@ -97,6 +99,22 @@ export default function Hall () {
 
         }
     }
+
+    // Aqui manejamos los errores del formulario de registro
+
+    const [registerErrors, setRegisterErrors] = useState({
+        error: false,
+        username: false,
+        email: '',
+        password: '',
+        repeatedPassword: ''
+    })
+
+    const [loginErrors, setLoginErrors] = useState({
+        error: false,
+        email: '',
+        password: ''
+    })
 
     // AQUI MANEJAMOS LA DATA DE LOGIN
 
@@ -114,28 +132,27 @@ export default function Hall () {
 
     // Aca manejamos el submit del login
 
-    const handleLoginSubmit = (event) => {
+    const handleLoginSubmit = async(event) => {
         event.preventDefault()
+
+        const errors = await validateLogin(loginData)
 
         setLoading(true)
 
-        const errors = validateLogin(loginData)
+        setLoginErrors(validateLogin(loginData));
 
-        !errors
-        ? loginHandler(loginData.email, loginData.password)
-        : (
-            setLoading(false),
-            Swal.fire('Ups', `You must complete the form correctly`, `error`)
+        (errors.error)
+        ? (
+            setLoading(false)
+        ) : (
+            loginHandler(loginData.email, loginData.password)
         )
     }
 
     //Aca manejamos el login con google
 
-    const [userData, setUserData] = useState({})
 
     const googleLogin = async(response) => {
-        setUserData(response.profileObj)
-
         loginHandler(response.profileObj.email)
     }
 
@@ -166,22 +183,26 @@ export default function Hall () {
     const handleRegisterSubmit = async(event) => {
         event.preventDefault()
 
-        const errors = validateRegister(registerData)
+        const errors = await validateRegister(registerData)
 
-        console.log(errors)
+        setLoading(true)
 
-        if(!errors) {
-            const {username, email, password} = registerData
+        setRegisterErrors(validateRegister(registerData))
+
+        const {username, email, password} = registerData
+
+        !errors.error ? (
             registerUser(username, email, password)
-        }
+        ) : (
+            setLoading(false)
+        )
+
+
     }
 
     // Aca manejamos el registro con google
 
     const googleRegistration = async(response) => {
-        setUserData(response.profileObj)
-
-        console.log((Math.round(Math.random()*10)).toString())
         
         const email = response.profileObj.email
         const username = response.profileObj.email.split('@')[0]
@@ -203,10 +224,22 @@ export default function Hall () {
     const [loginCSS, setLoginCSS] = useState(true)
 
     const selectLogin = () =>{
+        setRegisterErrors({
+            error: false,
+            username: false,
+            email: '',
+            password: '',
+            repeatedPassword: ''
+        })
         setLoginCSS(true)
     }
 
     const selectRegister = () => {
+        setLoginErrors({
+            error: false,
+            email: '',
+            password: ''
+        })
         setLoginCSS(false)
     }
   
@@ -227,8 +260,14 @@ export default function Hall () {
         <div className={style.bothLoginRegister}>
             <div className={loginCSS ? style.loginDiv : style.hiddenDiv}>
                 <form className={style.loginForm}>
-                    <input type="text" name="email" value={loginData.email} onChange={loginChange} placeholder='example@whatever.com'/>
-                    <input type="password" name="password" value={loginData.password} onChange={loginChange} placeholder='Password'/>
+                    <div>
+                        {loginErrors.email && <span className={style.error}>{loginErrors.email}</span>}
+                        <input type="text" name="email" value={loginData.email} onChange={loginChange} placeholder='example@whatever.com'/>
+                    </div>
+                    <div>
+                        {loginErrors.password && <span className={style.error}>{loginErrors.password}</span>}
+                        <input type="password" name="password" value={loginData.password} onChange={loginChange} placeholder='Password'/>
+                    </div>
                     <button className={style.submit} onClick={handleLoginSubmit}> Submit </button>
                 </form>
                 <h4>----- Or -----</h4>
@@ -242,10 +281,22 @@ export default function Hall () {
             </div>
             <div className={!loginCSS ? style.registerDiv : style.hiddenDiv}>
                 <form className={style.registerForm}>
-                    <input type="text" name="username" value={registerData.username} onChange={registerChange} placeholder='Username'/>
-                    <input type="text" name="email" value={registerData.email} onChange={registerChange} placeholder='example@whatever.com'/>
-                    <input type="password" name="password" value={registerData.password} onChange={registerChange} placeholder='Password'/>
-                    <input type="password" name="repeatedPassword" value={registerData.repeatedPassword} onChange={registerChange} placeholder='Repeat password'/>
+                    <div>
+                        <span className={registerErrors.username ? style.error : style.condition}>Min 5 characters</span>
+                        <input type="text" name="username" value={registerData.username} onChange={registerChange} placeholder='Username'/>
+                    </div>
+                    <div>
+                        {registerErrors.email && <span className={style.error}>{registerErrors.email}</span>}
+                        <input type="text" name="email" value={registerData.email} onChange={registerChange} placeholder='example@whatever.com'/>
+                    </div>
+                    <div>
+                        {registerErrors.password && <span className={style.error}>{registerErrors.password}</span>}
+                        <input type="password" name="password" value={registerData.password} onChange={registerChange} placeholder='Password'/>
+                    </div>
+                    <div>
+                        {registerErrors.repeatedPassword && <span className={style.error}>{registerErrors.repeatedPassword}</span>}
+                        <input type="password" name="repeatedPassword" value={registerData.repeatedPassword} onChange={registerChange} placeholder='Repeat password'/>
+                    </div>
                     <button className={style.submit} onClick={handleRegisterSubmit}> Submit </button>
                 </form>
                 <h4>----- Or -----</h4>
