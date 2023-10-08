@@ -9,6 +9,7 @@ import { validateForm, validateSubmit } from './Validation/validations';
 import creativity from '../../assets/creativityGif.gif'
 import './form.css'
 import style from './form.module.css'
+import Swal from 'sweetalert2';
 
 
 export default function Form() {
@@ -22,7 +23,8 @@ export default function Form() {
         difficulty:'',
         duration:'',
         season:'',
-        Countries:[]
+        Countries:[],
+        UserId: JSON.parse(localStorage.getItem('userData')).id
     })
 
     const [errors, setErrors] = useState({})
@@ -50,6 +52,8 @@ export default function Form() {
                 duration: Number(form.duration)
             })
             dispatch(createActivity(form))
+
+            Swal.fire(`Congratulation ${JSON.parse(localStorage.getItem('userData')).username}, your activity is now in the database`, success)
 
             setForm({
                 name:'',
