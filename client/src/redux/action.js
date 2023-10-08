@@ -66,12 +66,11 @@ export const createActivity = (activity) => {
 
         try {
 
-            const {name, difficulty, season, Countries, duration} = activity
+            const {name, difficulty, season, Countries, duration, UserId} = activity
 
-            const response = await axios.post('http://localhost:3001/activities', {name, difficulty, season, Countries, duration})
+            const response = await axios.post(`http://localhost:3001/activities/${UserId}`, {name, difficulty, season, Countries, duration})
             const dbActivity = response.data
 
-            alert('Congratulations, your activity is created')
             return dispatch({
                 type: 'CREATE_ACTIVITY',
                 payload: dbActivity
