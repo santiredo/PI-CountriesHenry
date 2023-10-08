@@ -26,44 +26,6 @@
     height: 100px;
 }
 
-.registerError{
-    padding: 20px 10px 20px 10px;
-    display: flex;
-    width: 30%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    background-color: #9d4f4f;
-    box-shadow: 10px 10px 20px #000000;
-    animation: registerError 1s forwards
-}
-
-@keyframes registerError {
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-}
-
-.registerError h1{
-    margin: 0;
-}
-
-.registerError button{
-    width: 30%;
-    height: 30px;
-    border: none;
-    background-color: #838588dd;
-    box-shadow: 2px 2px 5px #000000;
-    cursor: pointer;
-}
-
-.registerError button:hover{
-    box-shadow: none;
-}
-
 .formTitle{
     padding-top: 2.5vh;
     display: flex;
@@ -153,6 +115,10 @@
     gap: 20px;
 }
 
+.loginForm div{
+    position: relative;
+}
+
 .googleLogin span{
     display: none;
 }
@@ -180,6 +146,10 @@
     gap: 20px;
 }
 
+.registerForm div{
+    position: relative
+}
+
 .googleRegister span{
     display: none;
 }
@@ -191,4 +161,56 @@
     content: 'Sign up with Google';
     font-family:'Courier New';
     font-size: 15px;
+}
+
+.error{
+    position: absolute;
+    right: 1%;
+    top: -45%;
+    color: #ff0000;
+    animation: error .5s 
+}
+
+@keyframes error {
+    0%{
+        opacity: 0;
+        transform: rotate(10deg);
+    }
+    10%{
+        transform: rotate(-8deg);
+    }
+    20%{
+        transform: rotate(8deg);
+    }
+    30%{
+        transform: rotate(-6deg);
+    }
+    40%{
+        transform: rotate(6deg);
+    }
+    50%{
+        transform: rotate(-4deg);
+    }
+    60%{
+        transform: rotate(4deg);
+    }
+    70%{
+        transform: rotate(-2deg);
+    }
+    80%{
+        transform: rotate(2deg);
+    }
+    90%{
+        transform: rotate(-1deg);
+    }
+    100%{
+        opacity: 1;
+        transform: rotate(1deg);
+    }
+}
+
+.condition{
+    position: absolute;
+    right: 1%;
+    top: -45%;
 }
