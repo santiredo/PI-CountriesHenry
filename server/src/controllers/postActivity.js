@@ -1,4 +1,4 @@
-const { Activity, Country, User } = require("../db")
+const { Activity, Country } = require("../db")
 
 
 const postActivity = async(name, difficulty, duration, season, Countries, id) => {
@@ -9,14 +9,6 @@ const postActivity = async(name, difficulty, duration, season, Countries, id) =>
             throw new Error('Some data is missing')
         }
 
-        const assignedCountries = await Country.findAll({
-            where: {
-                name: Countries
-            }
-        })
-
-        console.log(id, typeof id)
-
         const newActivity = await Activity.create({
             name,
             difficulty,
@@ -25,8 +17,17 @@ const postActivity = async(name, difficulty, duration, season, Countries, id) =>
             UserId: id.toString()
         })
 
-       /*  await newActivity.addCountries(assignedCountries)
- */
+        for (const countryName of Countries) {
+
+            const assignedCountry = await Country.findOne({
+              where: {
+                name: countryName
+              }
+            });
+            
+            await newActivity.addCountry(assignedCountry);
+        }
+        
         return newActivity
         
     } catch (error) {
