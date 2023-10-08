@@ -7,8 +7,6 @@ const postUser = async(username, email, password) => {
 
     try {
 
-        console.log(username, email, password)
-
         const {MAIL_KEY} = process.env;
 
         if(!username || !email || !password){
@@ -17,15 +15,12 @@ const postUser = async(username, email, password) => {
 
         const doesEmailExist = await axios(`http://apilayer.net/api/check?access_key=${MAIL_KEY}&email=${email}`)
 
-
-        if(doesEmailExist.data.mx_found) {
+        if(doesEmailExist.data.smtp_check) {
             const userEmail = await User.findOne({
                 where:{
                     email,
                 }
             })
-
-            console.log(userEmail)
 
             if(userEmail) return 'This email is already in use, try using another one'
 
