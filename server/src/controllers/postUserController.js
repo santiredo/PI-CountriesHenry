@@ -13,9 +13,9 @@ const postUser = async(username, email, password) => {
             throw new Error('Some data is missing')
         }
 
-        const doesEmailExist = await axios(`http://apilayer.net/api/check?access_key=${MAIL_KEY}&email=${email}`)
+        const doesEmailExist = await axios(`https://api.zerobounce.net/v2/validate?api_key=${MAIL_KEY}&email=${email}&ip_address=null`)
 
-        if(doesEmailExist.data.smtp_check) {
+        if(doesEmailExist.data.status === 'valid') {
             const userEmail = await User.findOne({
                 where:{
                     email,
