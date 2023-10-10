@@ -61,11 +61,6 @@ export default function rootReducer(state = initialState, {type, payload}) {
                 currentPage: 1
             }       
 
-        case 'CREATE_ACTIVITY':
-            return {
-                ...state,
-                activities: [payload, ...state.activities]
-            }
         case 'GET_ACTIVITIES':
             return {
                 ...state,
