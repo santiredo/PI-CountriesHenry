@@ -31,10 +31,6 @@ export default function Landing () {
         };
 
     }, []);
-
-    useEffect(() => {
-        console.log(isHovering)
-    }, [isHovering])
   
     const handleMouseMove = (event) => {
         const canvas = canvasRef.current;

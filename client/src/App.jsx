@@ -4,10 +4,8 @@ import Home from './views/Home/Home'
 import Landing from './views/Landing/Landing'
 import Detail from './views/Detail/Detail'
 import Form from './views/Form/Form'
-import './App.css'
 import Activities from './views/Activities/Activities'
-import Hall from './views/Hall/Hall'
-
+import './App.css'
 
 export default function App() {
 
@@ -26,10 +24,10 @@ export default function App() {
     return (
       <>
         <Routes>
-          <Route path='/home' element={<Home/>} />
-          <Route path='/detail/:id' element={<Detail/>} />
-          <Route path='/form' element={<Form/>} />
-          <Route path='/activities' element={<Activities/>} />
+          <Route path={`/home`} element={<Home/>} />
+          <Route path={`/detail/:id`} element={<Detail/>} />
+          <Route path={`/form`} element={<Form/>} />
+          <Route path={`/activities`} element={<Activities/>} />
         </Routes>
       </>
     )
