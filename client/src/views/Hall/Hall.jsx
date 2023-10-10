@@ -36,8 +36,8 @@ export default function Hall () {
             typeof newUser.data !== 'string' ? (
                 localStorage.setItem('userData', JSON.stringify({id:newUser.data.id, email:email, username: username})),
                 setLoading(false),
-                Swal.fire(`Congratulations ${username}`, `Continue to see the prject`, `success`),
-                navigate('/home')
+                Swal.fire(`Congratulations ${username}`, `Continue to see the prject`),
+                navigate(`/home`)
             ) : (
                 setLoading(false),
                 Swal.fire(`Ups`, `${newUser.data}`, `error`),
@@ -67,9 +67,10 @@ export default function Hall () {
                     setLoading(false),
                     Swal.fire(`Upss`, `${email} does not exist in the data base, please create an account`, `error`)
                 ) : (
+                    localStorage.setItem('userData', JSON.stringify({id:logedUser.data.id, email:email, username: logedUser.data.name})),
                     setLoading(false),
-                    Swal.fire(`Welcome back ${logedUser.data.name}`, `success`),
-                    navigate('/home')
+                    Swal.fire(`Welcome back ${logedUser.data.name}`),
+                    navigate(`/home`)
                 )
 
             } catch (error) {
@@ -83,8 +84,9 @@ export default function Hall () {
                     setLoading(false)
                     logedUser.data.password === password
                     ? (
-                        Swal.fire(`Welcome back ${logedUser.data.name}`, `success`),
-                        navigate('/home')
+                        localStorage.setItem('userData', JSON.stringify({id:logedUser.data.id, email:email, username: logedUser.data.name})),
+                        Swal.fire(`Welcome back ${logedUser.data.name}`),
+                        navigate(`/home`)
                     ):(
                         Swal.fire(`Ups`, `The password didnt match the user`, 'error')
                     )
