@@ -82,11 +82,11 @@ export const createActivity = (activity) => {
     }
 }
 
-export const getActivities = () => {
+export const getActivities = (id) => {
     return async(dispatch) => {
 
         try {
-            const response = await axios('http://localhost:3001/activities')
+            const response = await axios(`http://localhost:3001/activities/${id}`)
             const activities = response.data
 
             return dispatch({

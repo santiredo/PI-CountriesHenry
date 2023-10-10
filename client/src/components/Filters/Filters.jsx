@@ -16,8 +16,10 @@ export default function Filters() {
         activity: null
     })
 
-    useEffect( ()=> {
-        dispatch(getActivities())
+    const userId = JSON.parse(localStorage.getItem('userData'))?.id
+
+    useEffect(()=> {
+        dispatch(getActivities(userId))
     },[])
 
     const resetCountriesHandler = () => {
