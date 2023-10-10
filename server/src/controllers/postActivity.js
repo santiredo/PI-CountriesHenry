@@ -9,6 +9,17 @@ const postActivity = async(name, difficulty, duration, season, Countries, id) =>
             throw new Error('Some data is missing')
         }
 
+        const isActivity = await Activity.findOne({
+            where:{
+                name: name,
+                UserId: id
+            }
+        })
+
+        if(isActivity) {
+            return 'This activity is already created'
+        }
+
         const newActivity = await Activity.create({
             name,
             difficulty,
