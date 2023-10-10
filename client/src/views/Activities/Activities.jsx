@@ -12,10 +12,10 @@ export default function() {
     const dispatch = useDispatch()
     const loading = useSelector(state => state.loadingActivities)
 
-    console.log(activities)
+
 
     useEffect( () => {
-        dispatch(getActivities())
+        dispatch(getActivities(JSON.parse(localStorage.getItem('userData')).id))
 
     },[dispatch])
 
