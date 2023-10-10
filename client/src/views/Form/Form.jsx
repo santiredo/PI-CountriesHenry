@@ -4,27 +4,27 @@ import React from 'react';
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Nav from '../../components/Nav/Nav';
-import { createActivity, getAllCountries } from '../../redux/action';
+import { getAllCountries } from '../../redux/action';
 import { validateForm, validateSubmit } from './Validation/validations';
 import creativity from '../../assets/creativityGif.gif'
+import Swal from 'sweetalert2';
+import axios from 'axios';
 import './form.css'
 import style from './form.module.css'
-import Swal from 'sweetalert2';
 
 
 export default function Form() {
-
     
     const dispatch = useDispatch()
-    const activities = useSelector(state => state.activities)
+
+    const UserId = JSON.parse(localStorage.getItem('userData')).id
 
     const [form, setForm] = useState({
         name:'',
         difficulty:'',
         duration:'',
         season:'',
-        Countries:[],
-        UserId: JSON.parse(localStorage.getItem('userData')).id
+        Countries:[]
     })
 
     const [errors, setErrors] = useState({})
@@ -40,10 +40,8 @@ export default function Form() {
     },[form])
 
 
-    const submitHandler = (event) => {
+    const submitHandler = async(event) => {
         event.preventDefault()
-        console.log(activities)
-        console.log(form.Countries)
 
         if(!validateSubmit(form)){
             setForm({
@@ -51,9 +49,21 @@ export default function Form() {
                 difficulty: Number(form.difficulty),
                 duration: Number(form.duration)
             })
-            dispatch(createActivity(form))
 
-            Swal.fire(`Congratulation ${JSON.parse(localStorage.getItem('userData')).username}, your activity is now in the database`, success)
+            try {
+                console.log(UserId)
+                const response = await axios.post(`http://localhost:3001/activities/${UserId}`, form)
+
+                console.log(response.data)
+
+                typeof response.data === 'string'
+                ? Swal.fire(`Ups, sorry ${response.data}`)
+                : Swal.fire(`Congratulation ${JSON.parse(localStorage.getItem('userData')).username}, your activity is now in the database`)
+
+            } catch (error) {
+                console.log(error.message)
+                Swal.fire(`${error.message}`)
+            }
 
             setForm({
                 name:'',
@@ -63,7 +73,7 @@ export default function Form() {
                 Countries:[]
             })
         }else{
-            alert('You must complete the form correctly')
+            Swal.fire('Ups, complete the form correctly please')
         }
 
     }
@@ -99,14 +109,13 @@ export default function Form() {
     }
 
     const handleCountry = (event) => {
-        console.log(form.Countries)
 
         if(form.Countries.includes(event.target.innerText)){
-            return alert('That country has already been choosen')
+            return Swal.fire('That country has already been choosen')
         }
 
         if(form.Countries.length > 4){
-            alert('Only 5 countries are available at the same time')
+            Swal.fire('Only 5 countries are available at the same time')
         } else {
             setForm({
                 ...form,
