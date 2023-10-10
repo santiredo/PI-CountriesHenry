@@ -4,7 +4,9 @@ const getActivities = require('../controllers/getActivities')
 const getActivitiesHandler = async(req, res) => {
 
     try {
-        const activities = await getActivities()
+        const {id} = req.params
+
+        const activities = await getActivities(id)
 
         res.status(200).json(activities)
     } catch (error) {

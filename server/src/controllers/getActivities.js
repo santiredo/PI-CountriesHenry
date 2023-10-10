@@ -1,9 +1,12 @@
 const {Activity, Country} = require('../db')
 
 
-const getActivities = async() => {
+const getActivities = async(id) => {
 
     let activities = await Activity.findAll({
+        where:{
+            UserId:id
+        },
         include: {
             model: Country,
             through: {
@@ -11,8 +14,6 @@ const getActivities = async() => {
             }
         }
     })
-
-    console.log(activities)
 
     return activities.map(activity => {
         return {
