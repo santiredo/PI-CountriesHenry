@@ -16,7 +16,7 @@ router.get('/countries/:id', getByIdHandler)
 router.get('/country', getByNameHandler)
 router.post('/activities/:id', postActivityHandler)
 router.get('/activities/:id', getActivitiesHandler)
-router.delete('/activities/:id', deleteActivity)
+router.delete('/activities/:id/:UserId', deleteActivity)
 router.post('/user', postUserHandler)
 router.get('/user', getByEmailHandler)
 
