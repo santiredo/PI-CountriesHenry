@@ -5,11 +5,11 @@ const getActivities = require('../controllers/getActivities')
 const deleteActivity = async(req, res) => {
 
     try {
-        const {id} = req.params
+        const {id, UserId} = req.params
 
-        await deleteActivityController(id)
+        await deleteActivityController(id, UserId)
 
-        const activities = await getActivities()
+        const activities = await getActivities(UserId)
 
         res.status(200).json(activities)
     } catch (error) {

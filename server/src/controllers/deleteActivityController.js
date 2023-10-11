@@ -1,9 +1,14 @@
 const {Activity} = require('../db')
 
 
-const deleteActivityController = async(id) => {
+const deleteActivityController = async(id, UserId) => {
 
-    const deletedActivity = await Activity.findByPk(id)
+    const deletedActivity = await Activity.findOne({
+        where:{
+            id,
+            UserId
+        }
+    })
 
     await deletedActivity.destroy()
 
