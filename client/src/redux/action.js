@@ -100,12 +100,12 @@ export const searchByName = (name) => {
     }
 }
 
-export const deleteActivity = (id) => {
+export const deleteActivity = (id, UserId) => {
 
     return async(dispatch) => {
         try {
 
-            const response = await axios.delete(`http://localhost:3001/activities/${id}`)
+            const response = await axios.delete(`http://localhost:3001/activities/${id}/${UserId}`)
 
             console.log(response.data)
 

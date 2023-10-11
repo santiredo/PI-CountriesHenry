@@ -12,17 +12,19 @@ export default function() {
     const dispatch = useDispatch()
     const loading = useSelector(state => state.loadingActivities)
 
+    const UserId = JSON.parse(localStorage.getItem('userData')).id
 
 
     useEffect( () => {
-        dispatch(getActivities(JSON.parse(localStorage.getItem('userData')).id))
+        dispatch(getActivities(UserId))
 
     },[dispatch])
 
     const handleDelete = (id) => {
 
-        dispatch(deleteActivity(id))
+        console.log(id, UserId)
 
+        dispatch(deleteActivity(id, UserId))
     }
 
     return (
