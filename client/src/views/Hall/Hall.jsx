@@ -31,7 +31,7 @@ export default function Hall () {
 
         setLoading(true)
         try {
-            const newUser = await axios.post(`http://localhost:3001/user`, {username, email, password})
+            const newUser = await axios.post(`https://pi-countrieshenry-production.up.railway.app/user`, {username, email, password})
 
             typeof newUser.data !== 'string' ? (
                 localStorage.setItem('userData', JSON.stringify({id:newUser.data.id, email:email, username: username})),
@@ -60,7 +60,7 @@ export default function Hall () {
         setLoading(true)
         if(!password){
             try {
-                const logedUser = await axios(`http://localhost:3001/user?email=${email}`)
+                const logedUser = await axios(`https://pi-countrieshenry-production.up.railway.app/user?email=${email}`)
 
                 !logedUser.data
                 ? (
@@ -78,7 +78,7 @@ export default function Hall () {
             }
         } else{
             try {
-                const logedUser = await axios.get(`http://localhost:3001/user?email=${email}`)
+                const logedUser = await axios.get(`https://pi-countrieshenry-production.up.railway.app/user?email=${email}`)
 
                 if(logedUser.data){
                     setLoading(false)

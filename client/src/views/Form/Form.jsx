@@ -52,7 +52,7 @@ export default function Form() {
 
             try {
                 console.log(UserId)
-                const response = await axios.post(`http://localhost:3001/activities/${UserId}`, form)
+                const response = await axios.post(`https://pi-countrieshenry-production.up.railway.app/activities/${UserId}`, form)
 
                 console.log(response.data)
 

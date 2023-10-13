@@ -3,7 +3,7 @@ import axios from 'axios'
 export const getAllCountries = () => {
     return (dispatch) => {
         try {
-            const response = axios('http://localhost:3001/countries').then(({data}) => {
+            const response = axios('https://pi-countrieshenry-production.up.railway.app/countries').then(({data}) => {
                 return dispatch({
                     type: 'GET_ALL_COUNTRIES',
                     payload: data
@@ -26,7 +26,7 @@ export const showDetails = (id) => {
     return async(dispatch) => {
         try {
 
-            const response = await axios(`http://localhost:3001/countries/${id}`)
+            const response = await axios(`https://pi-countrieshenry-production.up.railway.app/countries/${id}`)
             const data = response.data
             return dispatch({
                 type: 'SHOW_DETAILS',
@@ -65,7 +65,7 @@ export const getActivities = (id) => {
     return async(dispatch) => {
 
         try {
-            const response = await axios(`http://localhost:3001/activities/${id}`)
+            const response = await axios(`https://pi-countrieshenry-production.up.railway.app/activities/${id}`)
             const activities = response.data
 
             return dispatch({
@@ -83,7 +83,7 @@ export const searchByName = (name) => {
     return async(dispatch) => {
         try {
 
-            const response = await axios(`http://localhost:3001/country?name=${name}`)
+            const response = await axios(`https://pi-countrieshenry-production.up.railway.app/country?name=${name}`)
             const countries = response.data
             console.log(countries.length)
             if(countries.length === 0 || countries.length === 250) {
@@ -105,7 +105,7 @@ export const deleteActivity = (id, UserId) => {
     return async(dispatch) => {
         try {
 
-            const response = await axios.delete(`http://localhost:3001/activities/${id}/${UserId}`)
+            const response = await axios.delete(`https://pi-countrieshenry-production.up.railway.app/activities/${id}/${UserId}`)
 
             console.log(response.data)
 
