@@ -5,11 +5,10 @@ const fs = require('fs');
 const path = require('path');
 const {
   DATABASE_URL,
+  DB_USER
 } = process.env;
 
-console.log(DATABASE_URL)
-
-const sequelize = new Sequelize(`postgresql://postgres:Fb7gsahuRlQFQJrRJHlM@containers-us-west-204.railway.app:7989/railway`, {
+const sequelize = new Sequelize(DATABASE_URL, {
   logging: false, 
   native: false, 
 });
