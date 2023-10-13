@@ -1,9 +1,6 @@
 # Utiliza una imagen oficial de Node.js como imagen base
 FROM node:14
 
-# Establece el directorio de trabajo dentro del contenedor
-WORKDIR /app/server  # Cambia a la carpeta 'server'
-
 # Copia los archivos de configuración del proyecto (package.json y package-lock.json)
 COPY package*.json ./
 
