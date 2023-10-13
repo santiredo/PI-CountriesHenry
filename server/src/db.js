@@ -7,7 +7,9 @@ const {
   DATABASE_URL,
 } = process.env;
 
-const sequelize = new Sequelize(`${DATABASE_URL}`, {
+console.log(DATABASE_URL)
+
+const sequelize = new Sequelize(`postgresql://postgres:Fb7gsahuRlQFQJrRJHlM@containers-us-west-204.railway.app:7989/railway`, {
   logging: false, 
   native: false, 
 });
