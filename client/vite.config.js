@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: 'countries-pi-production-8b3a.up.railway.app'
+    host: '0.0.0.0'
   }
 })
