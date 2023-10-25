@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import background from '../../assets/landingBackground.png';
 import style from './landing.module.css';
 import Hall from '../Hall/Hall';
+import { useNavigate } from 'react-router-dom';
 
 export default function Landing () {
     const canvasRef = useRef(null);
@@ -54,9 +55,11 @@ export default function Landing () {
 
     const [login, setLogin] = useState(false)
 
+    const navigate = useNavigate()
     const handleHome = () => {
         setLogin(true)
         setIsHovering(false)
+        navigate('/home')
     }
   
     return (
