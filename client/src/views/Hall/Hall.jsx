@@ -11,7 +11,7 @@ import style from './hall.module.css';
 
 export default function Hall () {
 
-    const clientID = '295685867400-74qe6ef395rqe5f6nbnlse6dkq505qmv.apps.googleusercontent.com'
+    const clientID = '67896451421-l9ud55ojq6grrvkel9sav36dqe4kb85k.apps.googleusercontent.com'
 
     const navigate = useNavigate()
 
