@@ -300,13 +300,6 @@ export default function Hall () {
                 </form>
                 <h4>----- Or -----</h4>
                 <button className={style.googleLogin} onClick={googleLogin}></button>
-                <GoogleLogin
-                    className={style.googleLogin}
-                    clientId={clientID}
-                    onSuccess={googleLogin}
-                    onFailure={loginFailure}
-                    cookiePolicy={`single_host_policy`}
-                />
             </div>
             <div className={!loginCSS ? style.registerDiv : style.hiddenDiv}>
                 <form className={style.registerForm}>
@@ -329,13 +322,7 @@ export default function Hall () {
                     <button className={style.submit} onClick={handleRegisterSubmit}> Submit </button>
                 </form>
                 <h4>----- Or -----</h4>
-                <GoogleLogin
-                    className={style.googleRegister}
-                    clientId={clientID}
-                    onSuccess={googleRegistration}
-                    onFailure={registerFailure}
-                    cookiePolicy={`single_host_policy`}
-                />
+                <button className={style.googleRegister} onClick={googleRegistration}></button>
             </div>
         </div>
       </div>
