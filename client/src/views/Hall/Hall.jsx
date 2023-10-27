@@ -1,12 +1,33 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { gapi } from 'gapi-script'
-import GoogleLogin from 'react-google-login'
 import axios from 'axios'
 import { validateLogin, validateRegister } from './validation';
 import loadingGif from '../../assets/loadingGif.gif'
 import Swal from 'sweetalert2';
 import style from './hall.module.css';
+
+// IMPLEMENTACION DE SDK DE FIREBASE
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCPl-9m6Fdobc-RkdWx_LG6aC5UAvztaj0",
+  authDomain: "countriespi-73b0d.firebaseapp.com",
+  projectId: "countriespi-73b0d",
+  storageBucket: "countriespi-73b0d.appspot.com",
+  messagingSenderId: "42139559444",
+  appId: "1:42139559444:web:42ca999d6c666353ede901"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app)
+const provider = new GoogleAuthProvider()
 
 
 export default function Hall () {
@@ -155,7 +176,10 @@ export default function Hall () {
 
 
     const googleLogin = async(response) => {
-        loginHandler(response.profileObj.email)
+
+        signInWithPopup(auth, provider).then((data) => {
+            loginHandler(data.user.email)
+        })
     }
 
     const loginFailure = (response) => {
@@ -205,16 +229,18 @@ export default function Hall () {
     // Aca manejamos el registro con google
 
     const googleRegistration = async(response) => {
-        
-        const email = response.profileObj.email
-        const username = response.profileObj.email.split('@')[0]
-        let password = ''
 
-        for(let i = 0; i < 10; i++){
-            password += (Math.round(Math.random()*10)).toString()
-        }
+        signInWithPopup(auth, provider).then((data) => {
+            const email = data.user.email
+            const username = data.user.email.split('@')[0]
+            let password = ''
 
-        registerUser(username, email, password)
+            for(let i = 0; i < 10; i++){
+                password += (Math.round(Math.random()*10)).toString()
+            }
+
+            registerUser(username, email, password)
+        })
     }
 
     const registerFailure = (response) => {
@@ -273,6 +299,7 @@ export default function Hall () {
                     <button className={style.submit} onClick={handleLoginSubmit}> Submit </button>
                 </form>
                 <h4>----- Or -----</h4>
+                <button className={style.googleLogin} onClick={googleLogin}></button>
                 <GoogleLogin
                     className={style.googleLogin}
                     clientId={clientID}

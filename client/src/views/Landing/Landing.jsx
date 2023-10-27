@@ -59,7 +59,6 @@ export default function Landing () {
     const handleHome = () => {
         setLogin(true)
         setIsHovering(false)
-        navigate('/home')
     }
   
     return (
