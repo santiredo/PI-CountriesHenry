@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { validateLogin, validateRegister } from './validation';
 import loadingGif from '../../assets/loadingGif.gif'
 import Swal from 'sweetalert2';
+import googleIcon from '../../assets/googleIcon.png'
 import style from './hall.module.css';
 
 // IMPLEMENTACION DE SDK DE FIREBASE
@@ -36,15 +37,6 @@ export default function Hall () {
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        const start = () => {
-            gapi.auth2.init({
-                clientId: clientID
-            })
-        }
-
-        gapi.load('client:auth2', start)
-    }, [])
 
     // ACA CREAMOS EL USUARIO EN LA BASE DE DATOS
 
@@ -182,10 +174,6 @@ export default function Hall () {
         })
     }
 
-    const loginFailure = (response) => {
-        console.log(response)
-    }
-
     //AQUI MANEJAMOS LA DATA DEL REGISTRO
 
     const [registerData, setRegisterData] = useState({
@@ -299,7 +287,10 @@ export default function Hall () {
                     <button className={style.submit} onClick={handleLoginSubmit}> Submit </button>
                 </form>
                 <h4>----- Or -----</h4>
-                <button className={style.googleLogin} onClick={googleLogin}></button>
+                <button className={style.googleAuth} onClick={googleLogin}>
+                    <img src={googleIcon} alt="" />
+                    Log in with Google
+                </button>
             </div>
             <div className={!loginCSS ? style.registerDiv : style.hiddenDiv}>
                 <form className={style.registerForm}>
@@ -322,7 +313,10 @@ export default function Hall () {
                     <button className={style.submit} onClick={handleRegisterSubmit}> Submit </button>
                 </form>
                 <h4>----- Or -----</h4>
-                <button className={style.googleRegister} onClick={googleRegistration}></button>
+                <button className={style.googleAuth} onClick={googleRegistration}>
+                    <img src={googleIcon} alt="" />
+                    Sign up with Google
+                </button>
             </div>
         </div>
       </div>
