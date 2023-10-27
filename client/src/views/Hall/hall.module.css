@@ -107,28 +107,43 @@
     padding-left: 2.5%;
     width: 45%;
     flex-direction: column;
+    align-items: center;
 }
 
 .loginForm{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
 .loginForm div{
     position: relative;
 }
 
-.googleLogin span{
-    display: none;
+.googleAuth{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    width: 100%;
+    height: 40px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 0 10px #000000;
+    transition: .3s ease-in;
 }
 
-.googleLogin::after{
-    color: #000000;
-    display: inline-block;
-    width: 70%;
-    content: 'Log in with Google';
-    font-family:'Courier New';
+.googleAuth img{
+    position: absolute;
+    left: 5%;
+    width: 35px;
+}
+
+.googleAuth:hover{
+    box-shadow: 0 0 5px #000000;
+    transition: .2s ease;
+    width: 105%;
 }
 
 .registerDiv{
@@ -138,29 +153,19 @@
     flex-direction: column;
     font-family:'Courier New';
     font-size: 15px;
+    align-items: center;
 }
 
 .registerForm{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+
 }
 
 .registerForm div{
     position: relative
-}
-
-.googleRegister span{
-    display: none;
-}
-
-.googleRegister::after{
-    color: #000000;
-    display: inline-block;
-    width: 70%;
-    content: 'Sign up with Google';
-    font-family:'Courier New';
-    font-size: 15px;
 }
 
 .error{
