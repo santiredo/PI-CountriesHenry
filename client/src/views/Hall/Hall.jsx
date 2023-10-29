@@ -167,7 +167,7 @@ export default function Hall () {
     //Aca manejamos el login con google
 
 
-    const googleLogin = async(response) => {
+    const googleLogin = async() => {
 
         signInWithPopup(auth, provider).then((data) => {
             loginHandler(data.user.email)
@@ -216,7 +216,7 @@ export default function Hall () {
 
     // Aca manejamos el registro con google
 
-    const googleRegistration = async(response) => {
+    const googleRegistration = async() => {
 
         signInWithPopup(auth, provider).then((data) => {
             const email = data.user.email
@@ -227,12 +227,10 @@ export default function Hall () {
                 password += (Math.round(Math.random()*10)).toString()
             }
 
+            console.log(username, email, password)
+
             registerUser(username, email, password)
         })
-    }
-
-    const registerFailure = (response) => {
-        console.log(response)
     }
 
     // Aca manejamos los estilos de los formularios
