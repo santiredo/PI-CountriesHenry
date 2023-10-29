@@ -15,6 +15,8 @@ const postUser = async(username, email, password) => {
 
         const doesEmailExist = await axios(`https://api.hunter.io/v2/email-verifier?email=${email}&api_key=${MAIL_KEY}`)
 
+        console.log(doesEmailExist.data.data.status)
+
         if(doesEmailExist.data.data.status === 'valid') {
             const userEmail = await User.findOne({
                 where:{
