@@ -14,6 +14,7 @@ const postUser = async(username, email, password) => {
         }
 
         console.log(email, username, password)
+        console.log(MAIL_KEY)
 
         const doesEmailExist = await axios(`https://api.hunter.io/v2/email-verifier?email=${email}&api_key=${MAIL_KEY}`)
 
@@ -48,7 +49,8 @@ const postUser = async(username, email, password) => {
         }
 
     } catch (error) {
-        throw error
+        console.error("Error en la solicitud a Hunter.io:", error);
+        return { error: "Hubo un error al verificar el email" };
     }
 
 }

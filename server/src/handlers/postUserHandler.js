@@ -14,7 +14,7 @@ const postUserHandler = async(req, res) => {
         res.status(200).json(newUser)
         
     } catch (error) {
-        throw error
+        res.status(200).json(error)
     }
 }
 
