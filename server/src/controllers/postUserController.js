@@ -13,6 +13,8 @@ const postUser = async(username, email, password) => {
             throw new Error('Some data is missing')
         }
 
+        console.log(email, username, password)
+
         const doesEmailExist = await axios(`https://api.hunter.io/v2/email-verifier?email=${email}&api_key=${MAIL_KEY}`)
 
         console.log(doesEmailExist.data.data.status)
