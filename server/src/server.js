@@ -8,7 +8,7 @@ const server = express();
 server.use(morgan("dev"));
 server.use(express.json());
 server.use(cors({
-    origin: '*'
+    origin: 'https://creative-sawine-d91a6a.netlify.app'
 }));
 
 server.use(router);
