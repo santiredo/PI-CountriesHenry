@@ -1,9 +1,11 @@
 import axios from 'axios'
 
+axios.defaults.baseURL = 'http://localhost:3001';
+
 export const getAllCountries = () => {
     return (dispatch) => {
         try {
-            const response = axios('https://pi-countrieshenry-production.up.railway.app/countries').then(({data}) => {
+            const response = axios('/countries').then(({data}) => {
                 return dispatch({
                     type: 'GET_ALL_COUNTRIES',
                     payload: data
@@ -26,7 +28,7 @@ export const showDetails = (id) => {
     return async(dispatch) => {
         try {
 
-            const response = await axios(`https://pi-countrieshenry-production.up.railway.app/countries/${id}`)
+            const response = await axios(`/countries/${id}`)
             const data = response.data
             return dispatch({
                 type: 'SHOW_DETAILS',
@@ -65,7 +67,7 @@ export const getActivities = (id) => {
     return async(dispatch) => {
 
         try {
-            const response = await axios(`https://pi-countrieshenry-production.up.railway.app/activities/${id}`)
+            const response = await axios(`/activities/${id}`)
             const activities = response.data
 
             return dispatch({
@@ -83,7 +85,7 @@ export const searchByName = (name) => {
     return async(dispatch) => {
         try {
 
-            const response = await axios(`https://pi-countrieshenry-production.up.railway.app/country?name=${name}`)
+            const response = await axios(`/country?name=${name}`)
             const countries = response.data
             console.log(countries.length)
             if(countries.length === 0 || countries.length === 250) {
@@ -105,7 +107,7 @@ export const deleteActivity = (id, UserId) => {
     return async(dispatch) => {
         try {
 
-            const response = await axios.delete(`https://pi-countrieshenry-production.up.railway.app/activities/${id}/${UserId}`)
+            const response = await axios.delete(`/activities/${id}/${UserId}`)
 
             console.log(response.data)
 
