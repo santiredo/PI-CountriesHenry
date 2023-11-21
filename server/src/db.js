@@ -3,14 +3,21 @@ const { Sequelize } = require("sequelize");
 
 const fs = require('fs');
 const path = require('path');
+
 const {
-  DATABASE_URL,
-  DB_USER
+  DB_PASSWORD,
+  DB_USER,
+  DB_HOST
 } = process.env;
 
-const sequelize = new Sequelize(DATABASE_URL, {
-  logging: false, 
-  native: false, 
+const sequelize = new Sequelize({
+  dialect: 'postgres',
+  username: DB_USER,
+  password: DB_PASSWORD,
+  host: DB_HOST,
+  port: 5432,
+  logging: false,
+  native: false,
 });
 const basename = path.basename(__filename);
 
